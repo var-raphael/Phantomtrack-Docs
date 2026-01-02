@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Events Test - PhantomTrack</title>
+    <script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=track_k83kp11htilw8oxeuiao"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            padding: 12px 24px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            background: #6366f1;
+            color: white;
+        }
+        button:hover {
+            background: #4f46e5;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Custom Events Test Page</h1>
+    
+    <div class="section">
+        <h2>Button Clicks</h2>
+        <button onclick="phantom.track('button_click', {button: 'Get Started'})">
+            Get Started
+        </button>
+        <button onclick="phantom.track('button_click', {button: 'Learn More'})">
+            Learn More
+        </button>
+        <button onclick="phantom.track('button_click', {button: 'Contact Us'})">
+            Contact Us
+        </button>
+    </div>
+    
+    <div class="section">
+        <h2>E-commerce Actions</h2>
+        <button onclick="phantom.track('add_to_cart', {
+            product: 'Pro Plan',
+            price: 99,
+            currency: 'USD'
+        })">
+            Add to Cart - Pro Plan
+        </button>
+        <button onclick="phantom.track('purchase', {
+            product: 'Enterprise Plan',
+            price: 299,
+            currency: 'USD',
+            transaction_id: 'TXN-' + Date.now()
+        })">
+            Complete Purchase
+        </button>
+    </div>
+    
+    <div class="section">
+        <h2>User Engagement</h2>
+        <button onclick="phantom.track('video_play', {video: 'Product Demo'})">
+            Play Video
+        </button>
+        <button onclick="phantom.track('download', {file: 'whitepaper.pdf'})">
+            Download PDF
+        </button>
+        <button onclick="phantom.track('share', {platform: 'Twitter'})">
+            Share on Twitter
+        </button>
+    </div>
+    
+    <div class="section">
+        <h2>Form Interactions</h2>
+        <button onclick="phantom.track('form_start', {form: 'newsletter'})">
+            Start Newsletter Form
+        </button>
+        <button onclick="phantom.track('form_submit', {
+            form: 'newsletter',
+            email: 'user@example.com'
+        })">
+            Submit Newsletter
+        </button>
+    </div>
+    
+    <script>
+        console.log('✅ PhantomTrack loaded. Try clicking the buttons above!');
+        console.log('Check your dashboard to see custom events appear in real-time.');
+    </script>
+</body>
+</html>
