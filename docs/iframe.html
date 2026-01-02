@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Iframe Embed - PhantomTrack</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/font-awesome/icons/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+        
+        .docs-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 70px;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            left: 0;
+            top: 70px;
+            bottom: 0;
+            overflow-y: auto;
+            padding: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 999;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #FFFFFF;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-title {
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .nav-item:hover {
+            background: var(--hover);
+            color: var(--accent1);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #FFFFFF;
+        }
+
+        .nav-item i {
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .docs-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .docs-header {
+            margin-bottom: 40px;
+        }
+
+        .docs-header h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .docs-header p {
+            font-size: 18px;
+            color: var(--text);
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        .content-card {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .content-card h2 {
+            color: var(--text);
+            font-size: 24px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .content-card h2 i {
+            color: var(--accent1);
+        }
+
+        .content-card p {
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .content-card h3 {
+            color: var(--text);
+            font-size: 18px;
+            margin: 24px 0 12px 0;
+            font-weight: 600;
+        }
+
+        .content-card ul {
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 2;
+            margin-left: 20px;
+        }
+
+        .alert {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--accent1);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+
+        .alert-warning {
+            background: rgba(251, 191, 36, 0.1);
+            border-left-color: #fbbf24;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: #10b981;
+        }
+
+        .alert p {
+            margin: 0;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        .alert i {
+            margin-right: 8px;
+            color: var(--accent1);
+        }
+
+        .alert-warning i {
+            color: #fbbf24;
+        }
+
+        .alert-success i {
+            color: #10b981;
+        }
+
+        .code-wrapper {
+            position: relative;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .code-wrapper pre {
+            margin: 0;
+            padding: 16px;
+            overflow-x: auto;
+            border-radius: 8px;
+            max-width: 100%;
+        }
+        
+        .code-wrapper code {
+            font-size: 14px;
+            line-height: 1.6;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .copy-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .content-card code {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .theme-card {
+            background: var(--hover);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .theme-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent1);
+        }
+
+        .theme-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+        }
+
+        .theme-blue { background: #3b82f6; }
+        .theme-red { background: #ef4444; }
+        .theme-green { background: #10b981; }
+        .theme-amber { background: #f59e0b; }
+        .theme-purple { background: #a855f7; }
+
+        @media (max-width: 968px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .docs-content {
+                margin-left: 0;
+                padding: 24px 16px;
+            }
+
+            .docs-header h1 {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 24px 16px;
+            }
+            
+            .code-wrapper pre {
+                padding: 12px;
+            }
+
+            .theme-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="header">
+        <div class="header-content">
+            <h1><i class="fas fa-book"></i> PhantomTrack Docs</h1>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <span id="themeIcon"></span>
+            </button>
+        </div>
+    </div>
+
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="docs-container">
+        <nav class="sidebar" id="sidebar">
+            <div class="nav-section">
+                <div class="nav-title">Getting Started</div>
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="quickstart.html" class="nav-item">
+                    <i class="fas fa-rocket"></i>
+                    <span>Quick Start</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">Features</div>
+                
+                <a href="custom-events.html" class="nav-item">
+                    <i class="fas fa-mouse-pointer"></i>
+                    <span>Custom Events</span>
+                </a>
+                <a href="export.html" class="nav-item">
+                    <i class="fas fa-download"></i>
+                    <span>Export Options</span>
+                </a>
+                <a href="api.html" class="nav-item">
+                    <i class="fas fa-code"></i>
+                    <span>API Access</span>
+                </a>
+                <a href="iframe.html" class="nav-item active">
+                    <i class="fas fa-window-maximize"></i>
+                    <span>Embed Iframe</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">API Documentation</div>
+                <a href="authentication.html" class="nav-item">
+                    <i class="fas fa-key"></i>
+                    <span>Authentication</span>
+                </a>
+                <a href="endpoints.html" class="nav-item">
+                    <i class="fas fa-plug"></i>
+                    <span>Endpoints</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">Help & Support</div>
+                <a href="support.html" class="nav-item">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Get Support</span>
+                </a>
+                
+                <a href="hire-me.html" class="nav-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Hire Me</span>
+                </a>
+            </div>
+        </nav>
+
+        <main class="docs-content">
+            <div class="docs-header">
+                <h1><i class="fas fa-window-maximize"></i> Embed Dashboard with Iframe</h1>
+                <p>Display your PhantomTrack analytics directly in your own admin panel or dashboard.</p>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-info-circle"></i> What is Iframe Embed?</h2>
+                <p>Instead of using the PhantomTrack web dashboard or fetching data via API, you can embed the entire dashboard directly into your website using an iframe. This is perfect for:</p>
+                
+                <ul>
+                    <li>Admin panels where you want analytics displayed alongside other metrics</li>
+                    <li>Client dashboards where you need to show website performance</li>
+                    <li>Internal tools that aggregate data from multiple sources</li>
+                    <li>Custom layouts where you control the sizing and positioning</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-code"></i> Basic Usage</h2>
+                <p>Embed the PhantomTrack dashboard using a simple iframe. Just replace <code>YOUR_TRACK_ID</code> with your tracking ID:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<iframe \n  src=&quot;https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID&quot;\n  style=&quot;width: 100%; height: 100vh; border: none;&quot;\n></iframe>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;iframe 
+  src="https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID"
+  style="width: 100%; height: 100vh; border: none;"
+&gt;&lt;/iframe&gt;</code></pre>
+                </div>
+
+                <p style="margin-top: 20px;">Example with a real tracking ID:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<iframe \n  src=&quot;https://phantomtrack.42web.io/embed?track_id=track_fz3cmifh6b817mfx71l6my&quot;\n  style=&quot;width: 100%; height: 100vh; border: none;&quot;\n></iframe>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;iframe 
+  src="https://phantomtrack.42web.io/embed?track_id=track_fz3cmifh6b817mfx71l6my"
+  style="width: 100%; height: 100vh; border: none;"
+&gt;&lt;/iframe&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-palette"></i> Theme Colors</h2>
+                <p>Customize the dashboard appearance with different color themes using the <code>theme</code> parameter:</p>
+
+                <div class="theme-grid">
+                    <div class="theme-card">
+                        <div class="theme-preview theme-blue"></div>
+                        <strong>Blue</strong>
+                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">Default</p>
+                    </div>
+                    <div class="theme-card">
+                        <div class="theme-preview theme-red"></div>
+                        <strong>Red</strong>
+                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">theme=red</p>
+                    </div>
+                    <div class="theme-card">
+                        <div class="theme-preview theme-green"></div>
+                        <strong>Green</strong>
+                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">theme=green</p>
+                    </div>
+                    <div class="theme-card">
+                        <div class="theme-preview theme-amber"></div>
+                        <strong>Amber</strong>
+                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">theme=amber</p>
+                    </div>
+                    <div class="theme-card">
+                        <div class="theme-preview theme-purple"></div>
+                        <strong>Purple</strong>
+                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">theme=purple</p>
+                    </div>
+                </div>
+
+                <h3>How to use themes:</h3>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<iframe \n  src=&quot;https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID&theme=red&quot;\n  style=&quot;width: 100%; height: 100vh; border: none;&quot;\n></iframe>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;!-- Red theme --&gt;
+&lt;iframe 
+  src="https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID&theme=red"
+  style="width: 100%; height: 100vh; border: none;"
+&gt;&lt;/iframe&gt;</code></pre>
+                </div>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<iframe \n  src=&quot;https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID&theme=green&quot;\n  style=&quot;width: 100%; height: 100vh; border: none;&quot;\n></iframe>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;!-- Green theme --&gt;
+&lt;iframe 
+  src="https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID&theme=green"
+  style="width: 100%; height: 100vh; border: none;"
+&gt;&lt;/iframe&gt;</code></pre>
+                </div>
+
+                <div class="alert">
+                    <p><i class="fas fa-info-circle"></i> <strong>No theme parameter?</strong> Blue is the default theme. Just add <code>&theme=color</code> to change it.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-ruler-combined"></i> Custom Sizing</h2>
+                <p>Adjust the iframe size to fit your layout:</p>
+
+                <h3>Full viewport height:</h3>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<iframe \n  src=&quot;https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID&quot;\n  style=&quot;width: 100%; height: 100vh; border: none;&quot;\n></iframe>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;iframe 
+  src="https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID"
+  style="width: 100%; height: 100vh; border: none;"
+&gt;&lt;/iframe&gt;</code></pre>
+                </div>
+
+                <h3>Fixed height (800px):</h3>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<iframe \n  src=&quot;https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID&quot;\n  style=&quot;width: 100%; height: 800px; border: none;&quot;\n></iframe>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;iframe 
+  src="https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID"
+  style="width: 100%; height: 800px; border: none;"
+&gt;&lt;/iframe&gt;</code></pre>
+                </div>
+
+                <h3>Responsive container:</h3>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<div style=&quot;width: 100%; max-width: 1200px; margin: 0 auto;&quot;>\n  <iframe \n    src=&quot;https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID&quot;\n    style=&quot;width: 100%; height: 700px; border: none; border-radius: 12px;&quot;\n  ></iframe>\n</div>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;div style="width: 100%; max-width: 1200px; margin: 0 auto;"&gt;
+  &lt;iframe 
+    src="https://phantomtrack.42web.io/embed?track_id=YOUR_TRACK_ID"
+    style="width: 100%; height: 700px; border: none; border-radius: 12px;"
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-layer-group"></i> Integration Examples</h2>
+                
+                <h3>React Component:</h3>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'function AnalyticsDashboard() {\n  const trackId = \'track_fz3cmifh6b817mfx71l6my\';\n  const theme = \'red\';\n  \n  return (\n    <div className=&quot;analytics-container&quot;>\n      <iframe\n        src={`https://phantomtrack.42web.io/embed?track_id=${trackId}&theme=${theme}`}\n        style={{ width: \'100%\', height: \'100vh\', border: \'none\' }}\n        title=&quot;PhantomTrack Analytics&quot;\n      />\n    </div>\n  );\n}')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">function AnalyticsDashboard() {
+  const trackId = 'track_fz3cmifh6b817mfx71l6my';
+  const theme = 'red';
+  
+  return (
+    &lt;div className="analytics-container"&gt;
+      &lt;iframe
+        src={`https://phantomtrack.42web.io/embed?track_id=${trackId}&theme=${theme}`}
+        style={{ width: '100%', height: '100vh', border: 'none' }}
+        title="PhantomTrack Analytics"
+      /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                </div>
+
+                <h3>Vue.js Component:</h3>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<template>\n  <div class=&quot;analytics-container&quot;>\n    <iframe\n      :src=&quot;embedUrl&quot;\n      style=&quot;width: 100%; height: 100vh; border: none;&quot;\n      title=&quot;PhantomTrack Analytics&quot;\n    />\n  </div>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      trackId: \'track_fz3cmifh6b817mfx71l6my\',\n      theme: \'green\'\n    }\n  },\n  computed: {\n    embedUrl() {\n      return `https://phantomtrack.42web.io/embed?track_id=${this.trackId}&theme=${this.theme}`;\n    }\n  }\n}\n</script>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">&lt;template&gt;
+  &lt;div class="analytics-container"&gt;
+    &lt;iframe
+      :src="embedUrl"
+      style="width: 100%; height: 100vh; border: none;"
+      title="PhantomTrack Analytics"
+    /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      trackId: 'track_fz3cmifh6b817mfx71l6my',
+      theme: 'green'
+    }
+  },
+  computed: {
+    embedUrl() {
+      return `https://phantomtrack.42web.io/embed?track_id=${this.trackId}&theme=${this.theme}`;
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+                </div>
+
+                <h3>PHP:</h3>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<?php\n$track_id = \'track_fz3cmifh6b817mfx71l6my\';\n$theme = \'purple\';\n$embed_url = &quot;https://phantomtrack.42web.io/embed?track_id={$track_id}&theme={$theme}&quot;;\n?>\n\n<iframe \n  src=&quot;<?php echo $embed_url; ?>&quot;\n  style=&quot;width: 100%; height: 100vh; border: none;&quot;\n></iframe>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-php">&lt;?php
+$track_id = 'track_fz3cmifh6b817mfx71l6my';
+$theme = 'purple';
+$embed_url = "https://phantomtrack.42web.io/embed?track_id={$track_id}&theme={$theme}";
+?&gt;
+
+&lt;iframe 
+  src="&lt;?php echo $embed_url; ?&gt;"
+  style="width: 100%; height: 100vh; border: none;"
+&gt;&lt;/iframe&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-shield-alt"></i> Security & Best Practices</h2>
+                
+                <ul>
+                    <li><strong>Keep your tracking ID secure</strong> - Don't expose it in public repositories</li>
+                    <li><strong>Use HTTPS</strong> - Always load the iframe over HTTPS for security</li>
+                    <li><strong>Set appropriate sizing</strong> - Ensure the iframe has enough space to display the full dashboard</li>
+                    <li><strong>Test responsiveness</strong> - Check how the iframe looks on mobile devices</li>
+                    <li><strong>Match your brand</strong> - Choose a theme color that complements your design</li>
+                </ul>
+
+                <div class="alert alert-warning">
+                    <p><i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Anyone with access to your tracking ID can view your analytics. Only embed in authenticated areas of your site.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-question-circle"></i> Troubleshooting</h2>
+                
+                <h3>Iframe not loading?</h3>
+                <ul>
+                    <li>Verify your tracking ID is correct</li>
+                    <li>Check browser console for errors (F12)</li>
+                    <li>Ensure you're using HTTPS, not HTTP</li>
+                    <li>Try removing the theme parameter to test with default blue</li>
+                </ul>
+
+                <h3>Dashboard looks cut off?</h3>
+                <ul>
+                    <li>Increase the iframe height (minimum 700px recommended)</li>
+                    <li>Use <code>height: 100vh</code> for full viewport height</li>
+                    <li>Check your container doesn't have overflow hidden</li>
+                </ul>
+
+                <h3>Theme not changing?</h3>
+                <ul>
+                    <li>Make sure theme parameter is lowercase: <code>theme=red</code> not <code>theme=Red</code></li>
+                    <li>Available themes: blue, red, green, amber, purple</li>
+                    <li>Clear browser cache and reload</li>
+                </ul>
+            </div>
+
+            <div class="alert">
+                <p><i class="fas fa-arrow-right"></i> <strong>Next Step:</strong> Learn how to <a href="api.html" style="color: var(--accent1); font-weight: 600;">access your data via API</a> for custom integrations.</p>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="../assets/js/toogle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.sidebar-toggle');
+            
+            if (window.innerWidth <= 968) {
+                if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (window.innerWidth <= 968) {
+                    document.getElementById('sidebar').classList.remove('active');
+                }
+            });
+        });
+
+        function copyCode(button, text) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            button.style.background = 'rgba(16, 185, 129, 0.2)';
+            
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.style.background = 'rgba(255, 255, 255, 0.1)';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

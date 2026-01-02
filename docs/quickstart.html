@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Quick Start - PhantomTrack</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/font-awesome/icons/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+        
+        .docs-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 70px;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            left: 0;
+            top: 70px;
+            bottom: 0;
+            overflow-y: auto;
+            padding: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 999;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #FFFFFF;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-title {
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .nav-item:hover {
+            background: var(--hover);
+            color: var(--accent1);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #FFFFFF;
+        }
+
+        .nav-item i {
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .docs-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .docs-header {
+            margin-bottom: 40px;
+        }
+
+        .docs-header h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .docs-header p {
+            font-size: 18px;
+            color: var(--text);
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        .step-card {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 32px;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #FFFFFF;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+            z-index: 1;
+        }
+
+        .step-card h2 {
+            color: var(--text);
+            font-size: 24px;
+            margin-bottom: 16px;
+            margin-top: 8px;
+        }
+
+        .step-card p {
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--accent1);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+
+        .alert-warning {
+            background: rgba(251, 191, 36, 0.1);
+            border-left-color: #fbbf24;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: #10b981;
+        }
+
+        .alert p {
+            margin: 0;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        .alert i {
+            margin-right: 8px;
+            color: var(--accent1);
+        }
+
+        .alert-warning i {
+            color: #fbbf24;
+        }
+
+        .alert-success i {
+            color: #10b981;
+        }
+
+        .code-wrapper {
+            position: relative;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .code-wrapper pre {
+            margin: 0;
+            padding: 16px;
+            overflow-x: auto;
+            border-radius: 8px;
+            max-width: 100%;
+        }
+        
+        .code-wrapper code {
+            font-size: 14px;
+            line-height: 1.6;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .copy-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .step-card code {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        @media (max-width: 968px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .docs-content {
+                margin-left: 0;
+                padding: 24px 16px;
+            }
+
+            .docs-header h1 {
+                font-size: 32px;
+            }
+
+            .step-card {
+                padding: 24px 16px;
+            }
+            
+            .code-wrapper pre {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="header">
+        <div class="header-content">
+            <h1><i class="fas fa-book"></i> PhantomTrack Docs</h1>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <span id="themeIcon"></span>
+            </button>
+        </div>
+    </div>
+
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="docs-container">
+        <nav class="sidebar" id="sidebar">
+            <div class="nav-section">
+                <div class="nav-title">Getting Started</div>
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="quickstart.html" class="nav-item active">
+                    <i class="fas fa-rocket"></i>
+                    <span>Quick Start</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">Features</div>
+               
+                <a href="custom-events.html" class="nav-item">
+                    <i class="fas fa-mouse-pointer"></i>
+                    <span>Custom Events</span>
+                </a>
+                <a href="export.html" class="nav-item">
+                    <i class="fas fa-download"></i>
+                    <span>Export Options</span>
+                </a>
+                <a href="api.html" class="nav-item">
+                    <i class="fas fa-code"></i>
+                    <span>API Access</span>
+                </a>
+                <a href="iframe.html" class="nav-item">
+                    <i class="fas fa-window-maximize"></i>
+                    <span>Embed Iframe</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">API Documentation</div>
+                <a href="authentication.html" class="nav-item">
+                    <i class="fas fa-key"></i>
+                    <span>Authentication</span>
+                </a>
+                <a href="endpoints.html" class="nav-item">
+                    <i class="fas fa-plug"></i>
+                    <span>Endpoints</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">Help & Support</div>
+                <a href="support.html" class="nav-item">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Get Support</span>
+                </a>
+                
+                <a href="hire-me.html" class="nav-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Hire Me</span>
+                </a>
+            </div>
+        </nav>
+
+        <main class="docs-content">
+            <div class="docs-header">
+                <h1><i class="fas fa-rocket"></i> Quick Start Guide</h1>
+                <p>Get PhantomTrack running on your website in 30 seconds. No signup required.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h2>Generate Your Secret Key</h2>
+                <p>Visit the PhantomTrack homepage and click "Generate Secret Key". Your unique tracking ID will be created instantly - no email, no signup, just your key.</p>
+                
+                <div class="alert alert-warning">
+                    <p><i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Your secret key will be auto-downloaded as a .txt file. Save it somewhere safe! You'll need it to access your dashboard.</p>
+                </div>
+
+                <p style="margin-top: 20px;">Your tracking ID looks like this:</p>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'track_fz3cmifh6b817mfx71l6my')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code>track_fz3cmifh6b817mfx71l6my</code></pre>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h2>Copy the Tracking Script</h2>
+                <p>Use this simple one-line script. Just replace <code>YOUR_TRACK_ID</code> with your actual tracking ID from step 1.</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID&quot;></script>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID"&gt;&lt;/script&gt;</code></pre>
+                </div>
+
+                <p style="margin-top: 20px;">Example with a real tracking ID:</p>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=track_fz3cmifh6b817mfx71l6my&quot;></script>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=track_fz3cmifh6b817mfx71l6my"&gt;&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h2>Paste in Your &lt;head&gt; Tag</h2>
+                <p>Add the script to your website's <code>&lt;head&gt;</code> section. It works on any HTML page - static sites, WordPress, React, Next.js, anywhere!</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<!DOCTYPE html>\n<html>\n<head>\n  <title>My Website</title>\n  <script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=track_fz3cmifh6b817mfx71l6my&quot;></script>\n</head>\n<body>\n  <h1>Hello World</h1>\n</body>\n</html>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Website&lt;/title&gt;
+  &lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=track_fz3cmifh6b817mfx71l6my"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello World&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+
+                <div class="alert alert-success">
+                    <p><i class="fas fa-check-circle"></i> <strong>That's it!</strong> PhantomTrack is now live on your website. Visit your dashboard using your secret key to see analytics.</p>
+                </div>
+            </div>
+
+            <h2 style="color: var(--text); font-size: 28px; margin: 60px 0 24px 0;">
+                <i class="fas fa-layer-group" style="color: var(--accent1);"></i> Platform-Specific Setup
+            </h2>
+
+            <div class="step-card">
+                <h2><i class="fab fa-wordpress"></i> WordPress</h2>
+                <p>Add the script to your theme's header. Go to <strong>Appearance → Theme File Editor → header.php</strong> and paste before <code>&lt;/head&gt;</code>:</p>
+                
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID&quot;></script>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID"&gt;&lt;/script&gt;</code></pre>
+                </div>
+
+                <div class="alert">
+                    <p><i class="fas fa-lightbulb"></i> <strong>Alternative:</strong> Use a plugin like "Insert Headers and Footers" to add the script without editing theme files.</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <h2><i class="fab fa-react"></i> React / Next.js</h2>
+                <p>For React apps, add the script to your <code>public/index.html</code> file:</p>
+                
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<!DOCTYPE html>\n<html lang=&quot;en&quot;>\n  <head>\n    <meta charset=&quot;utf-8&quot; />\n    <script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID&quot;></script>\n  </head>\n  <body>\n    <div id=&quot;root&quot;></div>\n  </body>\n</html>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+
+                <p style="margin-top: 24px;"><strong>For Next.js,</strong> add it to <code>pages/_document.js</code>:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'import { Html, Head, Main, NextScript } from \'next/document\';\n\nexport default function Document() {\n  return (\n    <Html>\n      <Head>\n        <script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID&quot; />\n      </Head>\n      <body>\n        <Main />\n        <NextScript />\n      </body>\n    </Html>\n  );\n}')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">import { Html, Head, Main, NextScript } from 'next/document';
+
+export default function Document() {
+  return (
+    &lt;Html&gt;
+      &lt;Head&gt;
+        &lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID" /&gt;
+      &lt;/Head&gt;
+      &lt;body&gt;
+        &lt;Main /&gt;
+        &lt;NextScript /&gt;
+      &lt;/body&gt;
+    &lt;/Html&gt;
+  );
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <h2><i class="fab fa-vuejs"></i> Vue.js</h2>
+                <p>For Vue.js apps, add the script to your <code>public/index.html</code> file:</p>
+                
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<!DOCTYPE html>\n<html lang=&quot;en&quot;>\n  <head>\n    <meta charset=&quot;utf-8&quot;>\n    <script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID&quot;></script>\n  </head>\n  <body>\n    <div id=&quot;app&quot;></div>\n  </body>\n</html>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="app"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+
+                <p style="margin-top: 24px;"><strong>For Nuxt.js,</strong> add it to <code>app.html</code> in your project root:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<!DOCTYPE html>\n<html {{ HTML_ATTRS }}>\n  <head {{ HEAD_ATTRS }}>\n    {{ HEAD }}\n    <script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID&quot;></script>\n  </head>\n  <body {{ BODY_ATTRS }}>\n    {{ APP }}\n  </body>\n</html>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html {{ HTML_ATTRS }}&gt;
+  &lt;head {{ HEAD_ATTRS }}&gt;
+    {{ HEAD }}
+    &lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body {{ BODY_ATTRS }}&gt;
+    {{ APP }}
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <h2><i class="fab fa-angular"></i> Angular</h2>
+                <p>For Angular apps, add the script to your <code>src/index.html</code> file:</p>
+                
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<!DOCTYPE html>\n<html lang=&quot;en&quot;>\n<head>\n  <meta charset=&quot;utf-8&quot;>\n  <title>My App</title>\n  <base href=&quot;/&quot;>\n  <script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID&quot;></script>\n</head>\n<body>\n  <app-root></app-root>\n</body>\n</html>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;My App&lt;/title&gt;
+  &lt;base href="/"&gt;
+  &lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;app-root&gt;&lt;/app-root&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <h2><i class="fab fa-html5"></i> Static HTML Sites</h2>
+                <p>Just paste the script in the <code>&lt;head&gt;</code> section of every page you want to track:</p>
+                
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<!DOCTYPE html>\n<html>\n<head>\n  <script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID&quot;></script>\n</head>\n<body>\n  <!-- Your content -->\n</body>\n</html>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- Your content --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <h2><i class="fab fa-php"></i> PHP Applications</h2>
+                <p>Include the script in your header template or layout file:</p>
+                
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<!DOCTYPE html>\n<html>\n<head>\n  <?php include \'header.php\'; ?>\n  <script src=&quot;https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID&quot;></script>\n</head>\n<body>\n  <?php include \'content.php\'; ?>\n</body>\n</html>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-php">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;?php include 'header.php'; ?&gt;
+  &lt;script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=YOUR_TRACK_ID"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;?php include 'content.php'; ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+
+            <h2 style="color: var(--text); font-size: 28px; margin: 60px 0 24px 0;">
+                <i class="fas fa-question-circle" style="color: var(--accent1);"></i> Troubleshooting
+            </h2>
+
+            <div class="step-card">
+                <h2>Not seeing data in your dashboard?</h2>
+                <ul style="color: var(--text); opacity: 0.8; line-height: 2; margin-left: 20px;">
+                    <li>Make sure you replaced <code>YOUR_TRACK_ID</code> with your actual tracking ID</li>
+                    <li>Check that the script is in the <code>&lt;head&gt;</code> section, not <code>&lt;body&gt;</code></li>
+                    <li>Wait 1-2 minutes - data updates in near real-time but may have slight delays</li>
+                    <li>Open browser console (F12) and check for errors</li>
+                    <li>Verify your tracking ID format: should be <code>track_</code> followed by 20-30 characters</li>
+                </ul>
+            </div>
+
+            <div class="alert">
+                <p><i class="fas fa-arrow-right"></i> <strong>Next Step:</strong> Learn how to track <a href="custom-events.html" style="color: var(--accent1); font-weight: 600;">custom events</a> like button clicks and form submissions.</p>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="../assets/js/toogle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.sidebar-toggle');
+            
+            if (window.innerWidth <= 968) {
+                if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (window.innerWidth <= 968) {
+                    document.getElementById('sidebar').classList.remove('active');
+                }
+            });
+        });
+
+        function copyCode(button, text) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            button.style.background = 'rgba(16, 185, 129, 0.2)';
+            
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.style.background = 'rgba(255, 255, 255, 0.1)';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

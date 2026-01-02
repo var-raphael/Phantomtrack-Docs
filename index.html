@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PhantomTrack - Instant Web Analytics</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/w3.css">
+    <link rel="stylesheet" href="assets/font-awesome/icons/css/all.min.css">
+    <link rel="stylesheet" href="assets/font-awesome/icons/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/font-awesome/icons/css/brands.min.css">
+    <style>
+        .hero {
+            text-align: center;
+            padding: 100px 0 80px;
+        }
+        
+        .icon {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .card {
+            text-align: center;
+        }
+        
+        .card.featured {
+            border: 2px solid var(--accent1);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            opacity: 0.7;
+            margin-bottom: 40px;
+        }
+        
+        h3 {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+        
+        .plan-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--accent1);
+        }
+
+        .plan-price {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 20px 0;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .plan-price span {
+            font-size: 18px;
+            opacity: 0.7;
+        }
+
+        .plan-description {
+            font-size: 16px;
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 24px 0;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: var(--accent1);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            margin-top: 80px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-text {
+            margin: 8px 0;
+            opacity: 0.7;
+        }
+
+        .footer-link {
+            color: var(--accent1);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        /* Comparison Table Styles */
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            margin: 40px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: var(--card);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .comparison-table th:first-child {
+            border-top-left-radius: 12px;
+        }
+
+        .comparison-table th:last-child {
+            border-top-right-radius: 12px;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: var(--card);
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table .feature-name {
+            font-weight: 500;
+        }
+
+        .comparison-table .check {
+            color: #10b981;
+            font-size: 18px;
+        }
+
+        .comparison-table .cross {
+            color: #ef4444;
+            font-size: 18px;
+        }
+
+        .comparison-table .highlight-col {
+            background: rgba(99, 102, 241, 0.05);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+            
+            .plan-price {
+                font-size: 36px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    
+    <div class="header">
+        <div class="header-content">
+            <h1>PhantomTrack</h1>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <i id="themeIcon" class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="content">
+        
+        <div class="hero">
+            <h1>Instant Analytics.<br>No Friction.</h1>
+            <p class="w3-large">Track your website traffic in 30 seconds. No signup. No cookies. No BS.</p><br>
+            <button class="btn" onclick="window.location.href='https://phantomtrack.42web.io/dashboard'">
+                Start Analytics
+                <span class="arrow"><i class="fa fa-arrow-right"></i></span>
+            </button>
+        </div>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="icon"><i class="fa fa-bolt"></i></div>
+                <h3>No Signup Required</h3>
+                <p>Generate your tracking ID instantly. No account, no email (optional), no friction. Start tracking in 30 seconds.</p>
+            </div>
+            
+            <div class="card">
+                <div class="icon"><i class="fa fa-lock"></i></div>
+                <h3>Privacy-Focused</h3>
+                <p>No cookies. No personal data. GDPR compliant. We only track what matters: page views and traffic sources.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon"><i class="fa fa-globe"></i></div>
+                <h3>Country Tier Analysis</h3>
+                <p>See traffic from tier 1, 2, or 3 countries. Track browsers, devices, and geographic distribution.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon"><i class="fa fa-chart-line"></i></div>
+                <h3>Three Ways to View</h3>
+                <p>Web dashboard, iframe embed, or JSON API. Display your analytics however you want.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon"><i class="fa fa-brain"></i></div>
+                <h3>AI Weekly Review</h3>
+                <p>Get intelligent insights on what's working and what to improve with weekly AI-powered analysis.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon"><i class="fa fa-download"></i></div>
+                <h3>Export Anywhere</h3>
+                <p>Export data in CSV, JSON, XML, Excel, PHP array, HTML, or plain text. Your data, your way.</p>
+            </div>
+        </div>
+
+        <section style="margin-top: 80px;">
+            <h2 style="text-align: center; font-weight: 600;">Why Choose PhantomTrack?</h2>
+            <p class="subtitle">See how we compare to other analytics platforms</p>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th class="highlight-col">PhantomTrack</th>
+                            <th>Google Analytics</th>
+                            <th>Plausible</th>
+                            <th>Fathom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">No signup required</td>
+                            <td class="highlight-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Setup time</td>
+                            <td class="highlight-col">30 seconds</td>
+                            <td>15-30 minutes</td>
+                            <td>5-10 minutes</td>
+                            <td>5-10 minutes</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Lifetime deal available</td>
+                            <td class="highlight-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Suspicious traffic filtering</td>
+                            <td class="highlight-col"><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Country tier analysis</td>
+                            <td class="highlight-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">AI weekly insights</td>
+                            <td class="highlight-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Custom events</td>
+                            <td class="highlight-col"><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">API access</td>
+                            <td class="highlight-col"><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Iframe embed</td>
+                            <td class="highlight-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Export formats</td>
+                            <td class="highlight-col">7+ formats</td>
+                            <td>Limited</td>
+                            <td>CSV only</td>
+                            <td>CSV only</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">DDoS protection</td>
+                            <td class="highlight-col"><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Free plan</td>
+                            <td class="highlight-col">10k req/month</td>
+                            <td>Unlimited*</td>
+                            <td>Trial only</td>
+                            <td>Trial only</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Starting price</td>
+                            <td class="highlight-col">$3/month</td>
+                            <td>Free*</td>
+                            <td>$9/month</td>
+                            <td>$14/month</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">UI complexity</td>
+                            <td class="highlight-col">Simple</td>
+                            <td>Complex</td>
+                            <td>Simple</td>
+                            <td>Simple</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Data ownership</td>
+                            <td class="highlight-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="text-align: center; font-size: 14px; opacity: 0.6; margin-top: 16px;">* Google Analytics is free but uses your data for ad targeting</p>
+        </section>
+
+        <section style="margin-top: 80px;">
+            <h2 style="text-align: center; font-weight: 600;">Everything You Need</h2>
+            <p class="subtitle">All plans include every feature. No gates, no limits on functionality.</p>
+
+            <div class="card-grid" style="max-width: 1000px; margin-left: auto; margin-right: auto;">
+                <div class="card">
+                    <div class="icon"><i class="fa fa-users"></i></div>
+                    <h3>Unique Visitors</h3>
+                    <p>Track unique visitors and distinguish them from repeat visitors.</p>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-eye"></i></div>
+                    <h3>Page Views</h3>
+                    <p>Monitor total page views and time spent on your site.</p>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-calendar-alt"></i></div>
+                    <h3>Flexible Date Ranges</h3>
+                    <p>View data for today, last 7 days, last month, or last 3 months with graphs and pie charts.</p>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-mouse-pointer"></i></div>
+                    <h3>Custom Events</h3>
+                    <p>Track custom events and button clicks with detailed counts and analytics.</p>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-shield-alt"></i></div>
+                    <h3>Attack Protection</h3>
+                    <p>Strong security against DDoS and basic attacks. Suspicious activity is blocked automatically.</p>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-file-export"></i></div>
+                    <h3>Multi-Format Export</h3>
+                    <p>Export in CSV, JSON, XML, Excel, PHP array, HTML, or text format.</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-top: 80px;">
+            <h2 style="text-align: center; font-weight: 600;">Simple, Transparent Pricing</h2>
+            <p class="subtitle">All features included. 7-day money-back guarantee. Cancel anytime.</p>
+
+            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 1200px; margin-left: auto; margin-right: auto;">
+                <div class="card">
+                    <div class="plan-name">Free</div>
+                    <div class="plan-price">$0<span>/month</span></div>
+                    <p class="plan-description">Perfect for side projects</p>
+                    <ul class="plan-features">
+                        <li>10,000 requests/month</li>
+                        <li>All features included</li>
+                        <li>Dashboard + iframe + API</li>
+                        <li>Country tier analysis</li>
+                        <li>Custom events tracking</li>
+                        <li>AI weekly review</li>
+                        <li>Export in all formats</li>
+                    </ul>
+                    <button class="btn" onclick="window.location.href='https://phantomtrack.42web.io/dashboard'">Start Free</button>
+                </div>
+
+                <div class="card featured">
+                    <span class="badge">MOST POPULAR</span>
+                    <div class="plan-name">Pro</div>
+                    <div class="plan-price">$3<span>/month</span></div>
+                    <p class="plan-description">For growing projects</p>
+                    <ul class="plan-features">
+                        <li>30,000 requests/month</li>
+                        <li>All features included</li>
+                        <li>Dashboard + iframe + API</li>
+                        <li>Country tier analysis</li>
+                        <li>Custom events tracking</li>
+                        <li>AI weekly review</li>
+                        <li>Export in all formats</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn" onclick="window.location.href='https://phantomtrack.42web.io/dashboard'">Start Pro</button>
+                </div>
+
+                <div class="card">
+                    <div class="plan-name">Premium</div>
+                    <div class="plan-price">$5<span>/month</span></div>
+                    <p class="plan-description">For established sites</p>
+                    <ul class="plan-features">
+                        <li>60,000 requests/month</li>
+                        <li>All features included</li>
+                        <li>Dashboard + iframe + API</li>
+                        <li>Country tier analysis</li>
+                        <li>Custom events tracking</li>
+                        <li>AI weekly review</li>
+                        <li>Export in all formats</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn" onclick="window.location.href='https://phantomtrack.42web.io/dashboard'">Start Premium</button>
+                </div>
+
+                <div class="card">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-price">$8<span>/month</span></div>
+                    <p class="plan-description">For high-traffic sites</p>
+                    <ul class="plan-features">
+                        <li>100,000 requests/month</li>
+                        <li>All features included</li>
+                        <li>Dashboard + iframe + API</li>
+                        <li>Country tier analysis</li>
+                        <li>Custom events tracking</li>
+                        <li>AI weekly review</li>
+                        <li>Export in all formats</li>
+                        <li>Priority support</li>
+                        <li>Dedicated assistance</li>
+                    </ul>
+                    <button class="btn" onclick="window.location.href='https://phantomtrack.42web.io/dashboard'">Start Enterprise</button>
+                </div>
+            </div>
+
+            <div class="card" style="max-width: 600px; margin: 40px auto; border: 2px solid var(--accent2);">
+                <span class="badge" style="background: linear-gradient(135deg, var(--accent2), var(--accent1));">LAUNCH SPECIAL</span>
+                <div class="plan-name">Lifetime</div>
+                <div class="plan-price">$20<span> one-time</span></div>
+                <p class="plan-description">Limited time offer - Early adopter pricing</p>
+                <ul class="plan-features">
+                    <li>300,000 requests/month unlimited</li>
+                    <li>All features included forever</li>
+                    <li>Dashboard + iframe + API</li>
+                    <li>Country tier analysis</li>
+                    <li>Custom events tracking</li>
+                    <li>AI weekly review</li>
+                    <li>Export in all formats</li>
+                    <li>Lifetime updates</li>
+                    <li>Priority support forever</li>
+                </ul>
+                <button class="btn" onclick="window.location.href='https://phantomtrack.42web.io/dashboard'">Get Lifetime Access</button>
+                <p style="font-size: 14px; opacity: 0.6; margin-top: 16px;">Price increases to $50 for 500k req/month after launch period</p>
+            </div>
+        </section>
+
+        <section style="margin-top: 80px;">
+            <h2 style="text-align: center; font-weight: 600;">Documentation & Help</h2>
+            <p class="subtitle">Everything you need to get started</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="icon"><i class="fa fa-book-open"></i></div>
+                    <h3>Getting Started</h3>
+                    <p>Learn how to generate your tracking ID and install PhantomTrack on your website in under 2 minutes.</p>
+                    <br>
+                    <button class="btn" onclick="alert('View Getting Started Guide')">Read Guide</button>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-toolbox"></i></div>
+                    <h3>Integration Guide</h3>
+                    <p>Step-by-step tutorials for WordPress, React, Next.js, and more. Copy-paste ready code examples.</p>
+                    <br>
+                    <button class="btn" onclick="alert('View Integration Guide')">View Integrations</button>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-money-bill"></i></div>
+                    <h3>Payment & Billing</h3>
+                    <p>How to upgrade, manage your subscription, and handle billing issues. Paystack integration help.</p>
+                    <br>
+                    <button class="btn" onclick="alert('View Payment Help')">Payment Help</button>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-question"></i></div>
+                    <h3>FAQ</h3>
+                    <p>Common questions about data retention, privacy, API access, and troubleshooting tracking issues.</p>
+                    <br>
+                    <button class="btn" onclick="alert('View FAQ')">View FAQ</button>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-tools"></i></div>
+                    <h3>API Documentation</h3>
+                    <p>Complete API reference for developers. Fetch analytics data programmatically with JSON endpoints.</p>
+                    <br>
+                    <button class="btn" onclick="alert('View API Docs')">API Docs</button>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-comment-dots"></i></div>
+                    <h3>Support</h3>
+                    <h3>Need Help?</h3>
+                    <p>Contact us via email or Twitter. Pro users get priority support within 24 hours.</p>
+                    <br>
+                    <button class="btn" onclick="alert('Contact Support')">Contact Us</button>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-top: 80px;">
+            <h2 style="text-align: center; font-weight: 600;">Work With Me</h2>
+            <p class="subtitle">Need a developer? Let's build something amazing together</p>
+
+            <div class="card-grid" style="max-width: 900px; margin-left: auto; margin-right: auto;">
+                <div class="card">
+                    <div class="icon"><i class="fa fa-laptop-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Full-stack web applications with modern frameworks. Responsive, fast, and scalable solutions.</p>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-chart-area"></i></div>
+                    <h3>Data Analysis</h3>
+                    <p>Turn raw data into actionable insights. Data visualization, processing, and statistical analysis.</p>
+                </div>
+
+                <div class="card">
+                    <div class="icon"><i class="fa fa-cogs"></i></div>
+                    <h3>Backend Systems</h3>
+                    <p>Robust server-side architecture. APIs, databases, and scalable backend infrastructure.</p>
+                </div>
+            </div>
+
+            <div class="card" style="max-width: 600px; margin: 40px auto; text-align: center;">
+                <img src="assets/images/phantom.jpg" alt="CodePhantom" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent1); margin-bottom: 20px;">
+                <h3>CodePhantom - Full Stack Developer</h3>
+                <p style="margin: 20px 0;">Based in Nigeria 🇳🇬. Specializing in web development, data analysis, and backend systems. Coded PhantomTrack entirely on mobile (Yes mobile phone 😅) its a long but interesting story.</p>
+                
+                <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 20px 0; font-size: 14px;">
+                    <span style="background: var(--card); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border);">PHP</span>
+                    <span style="background: var(--card); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border);">Python</span>
+                    <span style="background: var(--card); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border);">Golang</span>
+                </div>
+                
+                <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
+                    <button class="btn" onclick="window.location.href='docs/hire-me.html'"><i class="fa fa-globe"></i> Portfolio</button>
+                    <button class="btn" onclick="alert('Email: your@email.com')"><i class="fa fa-envelope"></i> Email</button>
+                    <button class="btn" style="background: #1DA1F2;" onclick="alert('Twitter: @yourhandle')"><i class="fab fa-x-twitter"></i> X</button>
+                    <button class="btn" style="background: #333;" onclick="alert('Github: @yourhandle')"><i class="fab fa-github"></i> Github</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p class="footer-text">Built by <a href="#" class="footer-link">CodePhantom</a></p>
+            <p class="footer-text">Coded entirely on mobile in Nigeria 🇳🇬</p>
+            <p class="footer-text" style="margin-top: 24px; font-size: 14px;">
+                Part of the <span style="background: linear-gradient(135deg, #6366F1, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Nexaura</span> suite
+            </p>
+        </footer>
+
+    </div>
+    
+    <script src="assets/js/toogle.js"></script>
+</body>
+</html>

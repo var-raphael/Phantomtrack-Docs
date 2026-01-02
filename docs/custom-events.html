@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Custom Events - PhantomTrack</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/font-awesome/icons/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+        
+        .docs-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 70px;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            left: 0;
+            top: 70px;
+            bottom: 0;
+            overflow-y: auto;
+            padding: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 999;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #FFFFFF;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-title {
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .nav-item:hover {
+            background: var(--hover);
+            color: var(--accent1);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #FFFFFF;
+        }
+
+        .nav-item i {
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .docs-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .docs-header {
+            margin-bottom: 40px;
+        }
+
+        .docs-header h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .docs-header p {
+            font-size: 18px;
+            color: var(--text);
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        .content-card {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .content-card h2 {
+            color: var(--text);
+            font-size: 24px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .content-card h2 i {
+            color: var(--accent1);
+        }
+
+        .content-card p {
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .content-card h3 {
+            color: var(--text);
+            font-size: 18px;
+            margin: 24px 0 12px 0;
+            font-weight: 600;
+        }
+
+        .content-card ul {
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 2;
+            margin-left: 20px;
+        }
+
+        .alert {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--accent1);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+
+        .alert-warning {
+            background: rgba(251, 191, 36, 0.1);
+            border-left-color: #fbbf24;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: #10b981;
+        }
+
+        .alert p {
+            margin: 0;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        .alert i {
+            margin-right: 8px;
+            color: var(--accent1);
+        }
+
+        .alert-warning i {
+            color: #fbbf24;
+        }
+
+        .alert-success i {
+            color: #10b981;
+        }
+
+        .code-wrapper {
+            position: relative;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .code-wrapper pre {
+            margin: 0;
+            padding: 16px;
+            overflow-x: auto;
+            border-radius: 8px;
+            max-width: 100%;
+        }
+        
+        .code-wrapper code {
+            font-size: 14px;
+            line-height: 1.6;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .copy-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .content-card code {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .example-demo {
+            background: var(--hover);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .demo-button {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .demo-button:hover {
+            transform: scale(1.05);
+        }
+
+        .demo-output {
+            margin-top: 16px;
+            padding: 12px;
+            background: var(--card);
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #10b981;
+        }
+
+        @media (max-width: 968px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .docs-content {
+                margin-left: 0;
+                padding: 24px 16px;
+            }
+
+            .docs-header h1 {
+                font-size: 32px;
+            }
+
+            .content-card {
+                padding: 24px 16px;
+            }
+            
+            .code-wrapper pre {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="header">
+        <div class="header-content">
+            <h1><i class="fas fa-book"></i> PhantomTrack Docs</h1>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <span id="themeIcon"></span>
+            </button>
+        </div>
+    </div>
+
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="docs-container">
+        <nav class="sidebar" id="sidebar">
+            <div class="nav-section">
+                <div class="nav-title">Getting Started</div>
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="quickstart.html" class="nav-item">
+                    <i class="fas fa-rocket"></i>
+                    <span>Quick Start</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">Features</div>
+                
+                <a href="custom-events.html" class="nav-item active">
+                    <i class="fas fa-mouse-pointer"></i>
+                    <span>Custom Events</span>
+                </a>
+                <a href="export.html" class="nav-item">
+                    <i class="fas fa-download"></i>
+                    <span>Export Options</span>
+                </a>
+                <a href="api.html" class="nav-item">
+                    <i class="fas fa-code"></i>
+                    <span>API Access</span>
+                </a>
+                <a href="iframe.html" class="nav-item">
+                    <i class="fas fa-window-maximize"></i>
+                    <span>Embed Iframe</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">API Documentation</div>
+                <a href="authentication.html" class="nav-item">
+                    <i class="fas fa-key"></i>
+                    <span>Authentication</span>
+                </a>
+                <a href="endpoints.html" class="nav-item">
+                    <i class="fas fa-plug"></i>
+                    <span>Endpoints</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">Help & Support</div>
+                <a href="support.html" class="nav-item">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Get Support</span>
+                </a>
+                
+                <a href="hire-me.html" class="nav-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Hire Me</span>
+                </a>
+            </div>
+        </nav>
+
+        <main class="docs-content">
+            <div class="docs-header">
+                <h1><i class="fas fa-mouse-pointer"></i> Custom Events Tracking</h1>
+                <p>Track button clicks, form submissions, and any user interaction on your website.</p>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-lightbulb"></i> What are Custom Events?</h2>
+                <p>Custom events let you track specific user actions beyond basic page views. Monitor button clicks, video plays, form submissions, downloads, or any interaction you care about.</p>
+                
+                <h3>What you can track:</h3>
+                <ul>
+                    <li>Button clicks (CTA buttons, signup buttons, etc.)</li>
+                    <li>Form submissions (contact forms, newsletter signups)</li>
+                    <li>File downloads (PDFs, images, documents)</li>
+                    <li>Video interactions (play, pause, complete)</li>
+                    <li>E-commerce actions (add to cart, checkout started)</li>
+                    <li>Any custom user interaction</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-code"></i> Basic Usage</h2>
+                <p>PhantomTrack gives you a global <code>window.phantom.track()</code> function. Use it anywhere in your JavaScript:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'phantom.track(\'button_clicked\');')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">phantom.track('button_clicked');</code></pre>
+                </div>
+
+                <p style="margin-top: 24px;">You can also use the alias <code>phantom.event()</code> - they do the same thing:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'phantom.event(\'button_clicked\');')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">phantom.event('button_clicked');</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-play-circle"></i> Simple Button Click Example</h2>
+                <p>Track when a user clicks a button:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<button onclick=&quot;phantom.track(\'signup_clicked\')&quot;>\n  Sign Up\n</button>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;button onclick="phantom.track('signup_clicked')"&gt;
+  Sign Up
+&lt;/button&gt;</code></pre>
+                </div>
+
+                <div class="example-demo">
+                    <button class="demo-button" onclick="trackDemo('signup_clicked')">
+                        <i class="fas fa-user-plus"></i> Try It - Sign Up
+                    </button>
+                    <div id="demo-output" class="demo-output" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-database"></i> Adding Properties to Events</h2>
+                <p>Track additional data with your events using properties. This is useful for context like product names, prices, or user selections.</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'phantom.track(\'product_viewed\', {\n  product_name: \'Blue T-Shirt\',\n  price: 29.99,\n  category: \'clothing\'\n});')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">phantom.track('product_viewed', {
+  product_name: 'Blue T-Shirt',
+  price: 29.99,
+  category: 'clothing'
+});</code></pre>
+                </div>
+
+                <div class="alert">
+                    <p><i class="fas fa-info-circle"></i> <strong>Properties Limit:</strong> Properties must be under 10KB (10,000 characters) total when converted to JSON.</p>
+                </div>
+            </div>
+
+            <h2 style="color: var(--text); font-size: 28px; margin: 60px 0 24px 0;">
+                <i class="fas fa-code-branch" style="color: var(--accent1);"></i> Real-World Examples
+            </h2>
+
+            <div class="content-card">
+                <h2><i class="fas fa-envelope"></i> Form Submission</h2>
+                <p>Track when users submit a contact form:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<form onsubmit=&quot;phantom.track(\'contact_form_submitted\'); return true;&quot;>\n  <input type=&quot;email&quot; name=&quot;email&quot; placeholder=&quot;Your email&quot; />\n  <button type=&quot;submit&quot;>Submit</button>\n</form>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;form onsubmit="phantom.track('contact_form_submitted'); return true;"&gt;
+  &lt;input type="email" name="email" placeholder="Your email" /&gt;
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-download"></i> File Download</h2>
+                <p>Track PDF or file downloads:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<a href=&quot;/files/pricing.pdf&quot; \n   onclick=&quot;phantom.track(\'pdf_downloaded\', { file: \'pricing.pdf\' })&quot;>\n  Download Pricing PDF\n</a>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;a href="/files/pricing.pdf" 
+   onclick="phantom.track('pdf_downloaded', { file: 'pricing.pdf' })"&gt;
+  Download Pricing PDF
+&lt;/a&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-shopping-cart"></i> Add to Cart</h2>
+                <p>Track e-commerce actions:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<button onclick=&quot;addToCart()&quot;>Add to Cart</button>\n\n<script>\nfunction addToCart() {\n  // Your cart logic here\n  \n  phantom.track(\'add_to_cart\', {\n    product_id: \'prod_123\',\n    product_name: \'Wireless Headphones\',\n    price: 79.99,\n    quantity: 1\n  });\n}\n</script>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;button onclick="addToCart()"&gt;Add to Cart&lt;/button&gt;
+
+&lt;script&gt;
+function addToCart() {
+  // Your cart logic here
+  
+  phantom.track('add_to_cart', {
+    product_id: 'prod_123',
+    product_name: 'Wireless Headphones',
+    price: 79.99,
+    quantity: 1
+  });
+}
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-video"></i> Video Play Tracking</h2>
+                <p>Track when users interact with videos:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<video id=&quot;myVideo&quot; controls>\n  <source src=&quot;video.mp4&quot; type=&quot;video/mp4&quot;>\n</video>\n\n<script>\nconst video = document.getElementById(\'myVideo\');\n\nvideo.addEventListener(\'play\', function() {\n  phantom.track(\'video_played\', {\n    video_name: \'Product Demo\'\n  });\n});\n\nvideo.addEventListener(\'ended\', function() {\n  phantom.track(\'video_completed\', {\n    video_name: \'Product Demo\'\n  });\n});\n</script>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;video id="myVideo" controls&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+&lt;script&gt;
+const video = document.getElementById('myVideo');
+
+video.addEventListener('play', function() {
+  phantom.track('video_played', {
+    video_name: 'Product Demo'
+  });
+});
+
+video.addEventListener('ended', function() {
+  phantom.track('video_completed', {
+    video_name: 'Product Demo'
+  });
+});
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+
+            <h2 style="color: var(--text); font-size: 28px; margin: 60px 0 24px 0;">
+                <i class="fas fa-layer-group" style="color: var(--accent1);"></i> Framework-Specific Examples
+            </h2>
+
+            <div class="content-card">
+                <h2><i class="fab fa-react"></i> React</h2>
+                <p>Track events in React components:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'import React from \'react\';\n\nfunction SignupButton() {\n  const handleClick = () => {\n    // Your signup logic\n    \n    window.phantom.track(\'signup_clicked\', {\n      button_location: \'header\'\n    });\n  };\n  \n  return (\n    <button onClick={handleClick}>\n      Sign Up\n    </button>\n  );\n}\n\nexport default SignupButton;')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">import React from 'react';
+
+function SignupButton() {
+  const handleClick = () => {
+    // Your signup logic
+    
+    window.phantom.track('signup_clicked', {
+      button_location: 'header'
+    });
+  };
+  
+  return (
+    &lt;button onClick={handleClick}&gt;
+      Sign Up
+    &lt;/button&gt;
+  );
+}
+
+export default SignupButton;</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fab fa-vuejs"></i> Vue.js</h2>
+                <p>Track events in Vue components:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<template>\n  <button @click=&quot;trackSignup&quot;>\n    Sign Up\n  </button>\n</template>\n\n<script>\nexport default {\n  methods: {\n    trackSignup() {\n      // Your signup logic\n      \n      window.phantom.track(\'signup_clicked\', {\n        component: \'SignupButton\'\n      });\n    }\n  }\n}\n</script>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">&lt;template&gt;
+  &lt;button @click="trackSignup"&gt;
+    Sign Up
+  &lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  methods: {
+    trackSignup() {
+      // Your signup logic
+      
+      window.phantom.track('signup_clicked', {
+        component: 'SignupButton'
+      });
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fab fa-js"></i> jQuery</h2>
+                <p>Track events with jQuery:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '$(document).ready(function() {\n  $(\'#signup-btn\').click(function() {\n    phantom.track(\'signup_clicked\', {\n      source: \'homepage\'\n    });\n  });\n  \n  $(\'#newsletter-form\').submit(function() {\n    phantom.track(\'newsletter_signup\');\n  });\n});')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">$(document).ready(function() {
+  $('#signup-btn').click(function() {
+    phantom.track('signup_clicked', {
+      source: 'homepage'
+    });
+  });
+  
+  $('#newsletter-form').submit(function() {
+    phantom.track('newsletter_signup');
+  });
+});</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-robot"></i> Best Practices</h2>
+                
+                <h3>✓ DO:</h3>
+                <ul>
+                    <li>Use descriptive event names: <code>signup_clicked</code>, <code>pdf_downloaded</code></li>
+                    <li>Use underscores for multi-word events: <code>add_to_cart</code></li>
+                    <li>Keep event names under 100 characters</li>
+                    <li>Add properties for context: product names, prices, categories</li>
+                    <li>Test events in browser console first</li>
+                </ul>
+
+                <h3 style="margin-top: 24px;">✗ DON'T:</h3>
+                <ul>
+                    <li>Include personal data (emails, names, phone numbers)</li>
+                    <li>Use spaces in event names: use <code>button_clicked</code> not <code>button clicked</code></li>
+                    <li>Send properties larger than 10KB</li>
+                    <li>Track every tiny interaction (focus on important actions)</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-vial"></i> Testing Your Events</h2>
+                <p>Open your browser console (F12) and test tracking manually:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'phantom.track(\'test_event\', {\n  message: \'This is a test\'\n});')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">phantom.track('test_event', {
+  message: 'This is a test'
+});</code></pre>
+                </div>
+
+                <p style="margin-top: 20px;">Then check your PhantomTrack dashboard to see if the event appears in your custom events list.</p>
+
+                <div class="alert alert-success">
+                    <p><i class="fas fa-check-circle"></i> Events appear in your dashboard within seconds. Refresh to see the latest data.</p>
+                </div>
+            </div>
+
+            <div class="alert">
+                <p><i class="fas fa-arrow-right"></i> <strong>Next Step:</strong> Learn how to <a href="export.html" style="color: var(--accent1); font-weight: 600;">export your analytics data</a> in multiple formats.</p>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="../assets/js/toogle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.sidebar-toggle');
+            
+            if (window.innerWidth <= 968) {
+                if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (window.innerWidth <= 968) {
+                    document.getElementById('sidebar').classList.remove('active');
+                }
+            });
+        });
+
+        function copyCode(button, text) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            button.style.background = 'rgba(16, 185, 129, 0.2)';
+            
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.style.background = 'rgba(255, 255, 255, 0.1)';
+            }, 2000);
+        }
+
+        function trackDemo(eventName) {
+            const output = document.getElementById('demo-output');
+            output.style.display = 'block';
+            output.innerHTML = `✓ Event tracked: "${eventName}"<br>Check your dashboard to see this event!`;
+            
+            if (window.phantom && window.phantom.track) {
+                window.phantom.track(eventName);
+            }
+        }
+    </script>
+</body>
+</html>

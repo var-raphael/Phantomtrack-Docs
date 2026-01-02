@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CodePhantom - Full Stack Developer</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/w3.css">
+    <link rel="stylesheet" href="../assets/font-awesome/icons/css/all.min.css">
+    <style>
+        .hero-section {
+            text-align: center;
+            padding: 80px 0 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent1);
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 24px;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+        
+        .hero-description {
+            font-size: 18px;
+            opacity: 0.7;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 32px 0;
+        }
+        
+        .tech-badge {
+            background: var(--card);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-badge:hover {
+            border-color: var(--accent1);
+            transform: translateY(-2px);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 80px 0 16px;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            opacity: 0.7;
+            margin-bottom: 48px;
+        }
+        
+        .project-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            border-color: var(--accent1);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.2);
+        }
+        
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .project-icon {
+            font-size: 36px;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .project-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .project-tech {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+        
+        .project-tech-badge {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .project-description {
+            line-height: 1.6;
+            opacity: 0.8;
+            margin: 16px 0;
+        }
+        
+        .project-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+        
+        .project-highlights li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .project-highlights li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent1);
+            font-weight: bold;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+        
+        .skill-category {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .skill-category h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: var(--accent1);
+        }
+        
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .skill-list li {
+            padding: 8px 0;
+            opacity: 0.8;
+        }
+        
+        .experience-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .experience-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--accent1);
+        }
+        
+        .experience-years {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+        
+        .contact-section {
+            text-align: center;
+            background: var(--card);
+            border: 2px solid var(--accent1);
+            border-radius: 16px;
+            padding: 48px;
+            margin: 80px auto;
+            max-width: 700px;
+        }
+        
+        .contact-methods {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .cta-buttons, .contact-methods {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    
+    <div class="header">
+        <div class="header-content">
+            <h1>CodePhantom</h1>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <i id="themeIcon" class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="content">
+        
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <img src="../assets/images/phantom.jpg" alt="CodePhantom" class="profile-image">
+            <h1 class="hero-title">CodePhantom</h1>
+            <p class="hero-subtitle">Full Stack Developer & Problem Solver</p>
+            <p class="hero-description">
+                Building scalable web applications, CLI tools, and SaaS products. 6 years of experience turning ideas into production-ready solutions. Specialized in backend systems, data scraping, and modern web development.
+            </p>
+            
+            <div class="tech-stack">
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Golang</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">TypeScript</span>
+                <span class="tech-badge">Next.js</span>
+                <span class="tech-badge">React</span>
+                <span class="tech-badge">MySQL</span>
+                <span class="tech-badge">REST APIs</span>
+                <span class="tech-badge">Git</span>
+            </div>
+            
+            <div class="cta-buttons">
+                <button class="btn" onclick="window.open('https://github.com/var-raphael', '_blank')" style="background: #333;">
+                    <i class="fab fa-github"></i> Checkout My GitHub
+                </button>
+                <button class="btn" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
+                    <i class="fa fa-code"></i> View Projects
+                </button>
+                <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                    <i class="fa fa-envelope"></i> Get In Touch
+                </button>
+                <button class="btn" onclick="alert('Download Resume')">
+                    <i class="fa fa-download"></i> Download Resume
+                </button>
+            </div>
+        </div>
+        
+        <!-- Experience Section -->
+        <div class="experience-timeline">
+            <h2 class="section-title">Experience</h2>
+            <p class="section-subtitle">Building software solutions for 6+ years</p>
+            
+            <div class="experience-item">
+                <div class="experience-years">6+ Years</div>
+                <h3 style="font-size: 24px; margin-bottom: 12px;">Full Stack Development</h3>
+                <p style="opacity: 0.8; line-height: 1.6;">
+                    Extensive experience building web applications, SaaS products, and automation tools across multiple technology stacks. Specialized in creating scalable backend systems, RESTful APIs, and modern frontend interfaces. Strong focus on clean code, performance optimization, and user experience.
+                </p>
+                <ul class="project-highlights" style="margin-top: 16px;">
+                    <li>Built and deployed production SaaS applications serving real users</li>
+                    <li>Developed CLI tools for developer productivity and automation</li>
+                    <li>Created data scraping and processing pipelines with AI integration</li>
+                    <li>Designed and implemented e-commerce platforms with payment integration</li>
+                    <li>Worked with modern frameworks and best practices across PHP, Python, and JavaScript ecosystems</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Projects Section -->
+        <div id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Real-world applications built with modern technologies</p>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fa fa-chart-line project-icon"></i>
+                    <h3 class="project-title">PhantomTrack</h3>
+                </div>
+                <div class="project-tech">
+                    <span class="project-tech-badge">PHP</span>
+                    <span class="project-tech-badge">MySQL</span>
+                    <span class="project-tech-badge">REST API</span>
+                    <span class="project-tech-badge">JavaScript</span>
+                </div>
+                <p class="project-description">
+                    A frictionless web analytics SaaS platform that provides instant traffic insights without signup requirements. Built to be privacy-focused, fast, and developer-friendly with multiple integration options.
+                </p>
+                <ul class="project-highlights">
+                    <li>Architected and built complete SaaS platform from scratch using PHP and MySQL</li>
+                    <li>Implemented real-time analytics tracking with custom JavaScript SDK</li>
+                    <li>Designed RESTful API for programmatic data access and third-party integrations</li>
+                    <li>Built iframe embedding system for dashboard integration</li>
+                    <li>Created multi-tier subscription system with usage tracking and billing</li>
+                    <li>Implemented geo-location tracking with country tier classification (T1/T2/T3)</li>
+                    <li>Added DDoS protection and suspicious activity detection</li>
+                    <li>Integrated AI-powered weekly analytics review feature</li>
+                    <li>Supports multiple export formats (CSV, JSON, XML, Excel, PHP array)</li>
+                </ul>
+                <button class="btn" onclick="window.open('https://github.com/yourhandle/phantomtrack', '_blank')" style="background: #333; margin-top: 16px;">
+                    <i class="fab fa-github"></i> View on GitHub
+                </button>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fa fa-terminal project-icon"></i>
+                    <h3 class="project-title">WebHook CLI Tool</h3>
+                </div>
+                <div class="project-tech">
+                    <span class="project-tech-badge">Golang</span>
+                    <span class="project-tech-badge">CLI</span>
+                    <span class="project-tech-badge">HTTP</span>
+                </div>
+                <p class="project-description">
+                    A powerful command-line tool built with Go for managing and testing webhooks efficiently. Designed for developers who need quick webhook debugging and automation capabilities.
+                </p>
+                <ul class="project-highlights">
+                    <li>Built robust CLI application using Golang with clean command structure</li>
+                    <li>Implemented webhook listener and testing functionality</li>
+                    <li>Created request logging and payload inspection features</li>
+                    <li>Added support for multiple HTTP methods and custom headers</li>
+                    <li>Designed for cross-platform compatibility (Windows, Mac, Linux)</li>
+                    <li>Optimized for performance with Go's concurrency patterns</li>
+                </ul>
+                <button class="btn" onclick="window.open('https://github.com/yourhandle/webhook-cli', '_blank')" style="background: #333; margin-top: 16px;">
+                    <i class="fab fa-github"></i> View on GitHub
+                </button>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fa fa-robot project-icon"></i>
+                    <h3 class="project-title">AI-Powered Web Scraping Tool</h3>
+                </div>
+                <div class="project-tech">
+                    <span class="project-tech-badge">Python</span>
+                    <span class="project-tech-badge">AI/ML</span>
+                    <span class="project-tech-badge">BeautifulSoup</span>
+                    <span class="project-tech-badge">Selenium</span>
+                </div>
+                <p class="project-description">
+                    An intelligent web scraping solution that combines Python's scraping capabilities with AI assistance for data extraction, cleaning, and formatting. Automates complex data gathering workflows.
+                </p>
+                <ul class="project-highlights">
+                    <li>Developed comprehensive web scraping system using Python libraries</li>
+                    <li>Integrated AI for intelligent data extraction and pattern recognition</li>
+                    <li>Implemented automatic data formatting and cleaning pipelines</li>
+                    <li>Built support for dynamic JavaScript-heavy websites using Selenium</li>
+                    <li>Created export functionality for multiple data formats</li>
+                    <li>Added error handling and retry mechanisms for reliability</li>
+                    <li>Designed modular architecture for easy customization</li>
+                </ul>
+                <button class="btn" onclick="window.open('https://github.com/yourhandle/ai-web-scraper', '_blank')" style="background: #333; margin-top: 16px;">
+                    <i class="fab fa-github"></i> View on GitHub
+                </button>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fa fa-image project-icon"></i>
+                    <h3 class="project-title">VibeKit</h3>
+                </div>
+                <div class="project-tech">
+                    <span class="project-tech-badge">Next.js</span>
+                    <span class="project-tech-badge">TypeScript</span>
+                    <span class="project-tech-badge">React</span>
+                    <span class="project-tech-badge">TSX</span>
+                </div>
+                <p class="project-description">
+                    A modern web application for creating Instagram carousels and quote card posters. Built with Next.js and TypeScript for optimal performance and type safety.
+                </p>
+                <ul class="project-highlights">
+                    <li>Built full-stack application using Next.js 13+ with App Router</li>
+                    <li>Implemented canvas-based image generation and manipulation</li>
+                    <li>Created intuitive drag-and-drop interface with React components</li>
+                    <li>Developed template system for quick carousel creation</li>
+                    <li>Added export functionality for Instagram-optimized images</li>
+                    <li>Utilized TypeScript for type safety and better developer experience</li>
+                    <li>Implemented responsive design for mobile and desktop usage</li>
+                </ul>
+                <button class="btn" onclick="window.open('https://github.com/yourhandle/vibekit', '_blank')" style="background: #333; margin-top: 16px;">
+                    <i class="fab fa-github"></i> View on GitHub
+                </button>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fa fa-shopping-cart project-icon"></i>
+                    <h3 class="project-title">Furniture E-Commerce Platform</h3>
+                </div>
+                <div class="project-tech">
+                    <span class="project-tech-badge">PHP</span>
+                    <span class="project-tech-badge">MySQL</span>
+                    <span class="project-tech-badge">JavaScript</span>
+                    <span class="project-tech-badge">Payment Gateway</span>
+                </div>
+                <p class="project-description">
+                    A complete e-commerce solution for furniture retail with inventory management, shopping cart, and secure payment processing. Focused on user experience and conversion optimization.
+                </p>
+                <ul class="project-highlights">
+                    <li>Developed full e-commerce platform with product catalog and search</li>
+                    <li>Implemented shopping cart and checkout flow with session management</li>
+                    <li>Integrated payment gateway for secure online transactions</li>
+                    <li>Built admin dashboard for inventory and order management</li>
+                    <li>Created responsive product gallery with image zoom functionality</li>
+                    <li>Added user authentication and order tracking features</li>
+                    <li>Optimized database queries for fast product filtering and search</li>
+                </ul>
+                <button class="btn" onclick="window.open('https://github.com/yourhandle/furniture-ecommerce', '_blank')" style="background: #333; margin-top: 16px;">
+                    <i class="fab fa-github"></i> View on GitHub
+                </button>
+            </div>
+        </div>
+        
+        <!-- Skills Section -->
+        <div>
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">Technologies I work with daily</p>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fa fa-server"></i> Backend Development</h3>
+                    <ul class="skill-list">
+                        <li>PHP (Laravel, Core PHP)</li>
+                        <li>Python (Flask, Django)</li>
+                        <li>Golang</li>
+                        <li>RESTful API Design</li>
+                        <li>Database Design (MySQL)</li>
+                        <li>Authentication & Security</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fa fa-laptop-code"></i> Frontend Development</h3>
+                    <ul class="skill-list">
+                        <li>JavaScript (ES6+)</li>
+                        <li>TypeScript</li>
+                        <li>React.js</li>
+                        <li>Next.js</li>
+                        <li>HTML5 & CSS3</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fa fa-tools"></i> Tools & Technologies</h3>
+                    <ul class="skill-list">
+                        <li>Git & GitHub</li>
+                        <li>CLI Tool Development</li>
+                        <li>Web Scraping</li>
+                        <li>Payment Gateway Integration</li>
+                        <li>AI/ML Integration</li>
+                        <li>API Documentation</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fa fa-rocket"></i> Specializations</h3>
+                    <ul class="skill-list">
+                        <li>SaaS Architecture</li>
+                        <li>E-commerce Systems</li>
+                        <li>Data Processing</li>
+                        <li>Performance Optimization</li>
+                        <li>Security Best Practices</li>
+                        <li>Mobile-First Development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Section -->
+        <div id="contact" class="contact-section">
+            <h2 style="font-size: 32px; margin-bottom: 16px;">Let's Work Together</h2>
+            <p style="font-size: 18px; opacity: 0.8; margin-bottom: 24px;">
+                Available for full-time positions, contract work, and freelance projects. Open to remote opportunities worldwide.
+            </p>
+            
+            <div class="contact-methods">
+                <button class="btn" onclick="alert('Email: codephantom@email.com')">
+                    <i class="fa fa-envelope"></i> Email Me
+                </button>
+                <button class="btn" style="background: #1DA1F2;" onclick="alert('Twitter: @codephantom')">
+                    <i class="fab fa-x-twitter"></i> Twitter
+                </button>
+                <button class="btn" style="background: #333;" onclick="window.open('https://github.com/yourhandle', '_blank')">
+                    <i class="fab fa-github"></i> GitHub
+                </button>
+                <button class="btn" style="background: #0A66C2;" onclick="alert('LinkedIn: linkedin.com/in/codephantom')">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </button>
+            </div>
+            
+            <p style="margin-top: 32px; font-size: 14px; opacity: 0.6;">
+                Based in Nigeria 🇳🇬 | Open to Remote Work Worldwide
+            </p>
+        </div>
+        
+    </div>
+    
+    <script src="../assets/js/toogle.js"></script>
+</body>
+</html>
