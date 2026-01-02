@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Events Test - PhantomTrack</title>
-    <script src="https://phantomtrack.42web.io/phantom.v1.0.0.js?trackid=track_k83kp11htilw8oxeuiao"></script>
+    <script src="https://phantomtrack.42web.io/phantom.js?trackid=track_k83kp11htilw8oxeuiao"></script>
     <style>
         body {
             font-family: system-ui, -apple-system, sans-serif;
@@ -34,34 +34,45 @@
         h2 {
             margin-top: 0;
         }
+        #debug {
+            background: #fee;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
     <h1>🧪 Custom Events Test Page</h1>
     
+    <div id="debug">
+        Script status: <span id="status">Loading...</span>
+    </div>
+    
     <div class="section">
         <h2>Button Clicks</h2>
-        <button onclick="phantom.track('button_click', {button: 'Get Started'})">
+        <button onclick="trackEvent('button_click', {button: 'Get Started'})">
             Get Started
         </button>
-        <button onclick="phantom.track('button_click', {button: 'Learn More'})">
+        <button onclick="trackEvent('button_click', {button: 'Learn More'})">
             Learn More
         </button>
-        <button onclick="phantom.track('button_click', {button: 'Contact Us'})">
+        <button onclick="trackEvent('button_click', {button: 'Contact Us'})">
             Contact Us
         </button>
     </div>
     
     <div class="section">
         <h2>E-commerce Actions</h2>
-        <button onclick="phantom.track('add_to_cart', {
+        <button onclick="trackEvent('add_to_cart', {
             product: 'Pro Plan',
             price: 99,
             currency: 'USD'
         })">
             Add to Cart - Pro Plan
         </button>
-        <button onclick="phantom.track('purchase', {
+        <button onclick="trackEvent('purchase', {
             product: 'Enterprise Plan',
             price: 299,
             currency: 'USD',
@@ -73,23 +84,23 @@
     
     <div class="section">
         <h2>User Engagement</h2>
-        <button onclick="phantom.track('video_play', {video: 'Product Demo'})">
+        <button onclick="trackEvent('video_play', {video: 'Product Demo'})">
             Play Video
         </button>
-        <button onclick="phantom.track('download', {file: 'whitepaper.pdf'})">
+        <button onclick="trackEvent('download', {file: 'whitepaper.pdf'})">
             Download PDF
         </button>
-        <button onclick="phantom.track('share', {platform: 'Twitter'})">
+        <button onclick="trackEvent('share', {platform: 'Twitter'})">
             Share on Twitter
         </button>
     </div>
     
     <div class="section">
         <h2>Form Interactions</h2>
-        <button onclick="phantom.track('form_start', {form: 'newsletter'})">
+        <button onclick="trackEvent('form_start', {form: 'newsletter'})">
             Start Newsletter Form
         </button>
-        <button onclick="phantom.track('form_submit', {
+        <button onclick="trackEvent('form_submit', {
             form: 'newsletter',
             email: 'user@example.com'
         })">
@@ -98,8 +109,32 @@
     </div>
     
     <script>
-        console.log('✅ PhantomTrack loaded. Try clicking the buttons above!');
-        console.log('Check your dashboard to see custom events appear in real-time.');
+        // Wait for script to load and check
+        window.addEventListener('load', function() {
+            const statusEl = document.getElementById('status');
+            
+            if (typeof window.phantom !== 'undefined') {
+                statusEl.textContent = '✅ PhantomTrack loaded successfully!';
+                statusEl.parentElement.style.background = '#efe';
+                console.log('✅ PhantomTrack loaded. Version:', window.phantom.version);
+            } else {
+                statusEl.textContent = '❌ PhantomTrack failed to load!';
+                statusEl.parentElement.style.background = '#fee';
+                console.error('❌ PhantomTrack not found on window object');
+                console.log('Available on window:', Object.keys(window));
+            }
+        });
+        
+        // Safe tracking function
+        function trackEvent(eventName, properties) {
+            if (typeof window.phantom !== 'undefined' && window.phantom.track) {
+                console.log('📊 Tracking:', eventName, properties);
+                window.phantom.track(eventName, properties);
+            } else {
+                console.error('❌ PhantomTrack not loaded yet!');
+                alert('PhantomTrack is not loaded. Check the console for details.');
+            }
+        }
     </script>
 </body>
 </html>
