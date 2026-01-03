@@ -548,28 +548,28 @@
 
                 <h3>Method 1: X-API-KEY Header (Recommended)</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'curl -H \'X-API-KEY: sk_test_your_key_here\' \\\n  https://phantomtrack.42web.io/api/analytics?endpoint=stats')">
+                    <button class="copy-button" onclick="copyCode(this, 'curl -H \'X-API-KEY: sk_test_your_key_here\' \\\n  https://phantomtrack.xyz/api/analytics?endpoint=stats')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-bash">curl -H 'X-API-KEY: sk_test_your_key_here' \
-  https://phantomtrack.42web.io/api/analytics?endpoint=stats</code></pre>
+  https://phantomtrack.xyz/api/analytics?endpoint=stats</code></pre>
                 </div>
 
                 <h3>Method 2: Authorization Bearer Header</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'curl -H \'Authorization: Bearer sk_test_your_key_here\' \\\n  https://phantomtrack.42web.io/api/analytics?endpoint=stats')">
+                    <button class="copy-button" onclick="copyCode(this, 'curl -H \'Authorization: Bearer sk_test_your_key_here\' \\\n  https://phantomtrack.xyz/api/analytics?endpoint=stats')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-bash">curl -H 'Authorization: Bearer sk_test_your_key_here' \
-  https://phantomtrack.42web.io/api/analytics?endpoint=stats</code></pre>
+  https://phantomtrack.xyz/api/analytics?endpoint=stats</code></pre>
                 </div>
 
                 <h3>Method 3: Query Parameter</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'curl \'https://phantomtrack.42web.io/api/analytics?endpoint=stats&api_key=sk_test_your_key_here\'')">
+                    <button class="copy-button" onclick="copyCode(this, 'curl \'https://phantomtrack.xyz/api/analytics?endpoint=stats&api_key=sk_test_your_key_here\'')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
-                    <pre><code class="language-bash">curl 'https://phantomtrack.42web.io/api/analytics?endpoint=stats&api_key=sk_test_your_key_here'</code></pre>
+                    <pre><code class="language-bash">curl 'https://phantomtrack.xyz/api/analytics?endpoint=stats&api_key=sk_test_your_key_here'</code></pre>
                 </div>
 
                 <div class="alert">
@@ -582,10 +582,10 @@
                 
                 <h3>JavaScript (Fetch API)</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'fetch(\'https://phantomtrack.42web.io/api/analytics?endpoint=stats\', {\n  method: \'GET\',\n  headers: {\n    \'X-API-KEY\': \'sk_test_your_key_here\'\n  }\n})\n.then(response => response.json())\n.then(data => {\n  console.log(\'Analytics:\', data);\n})\n.catch(error => {\n  console.error(\'Error:\', error);\n});')">
+                    <button class="copy-button" onclick="copyCode(this, 'fetch(\'https://phantomtrack.xyz/api/analytics?endpoint=stats\', {\n  method: \'GET\',\n  headers: {\n    \'X-API-KEY\': \'sk_test_your_key_here\'\n  }\n})\n.then(response => response.json())\n.then(data => {\n  console.log(\'Analytics:\', data);\n})\n.catch(error => {\n  console.error(\'Error:\', error);\n});')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
-                    <pre><code class="language-javascript">fetch('https://phantomtrack.42web.io/api/analytics?endpoint=stats', {
+                    <pre><code class="language-javascript">fetch('https://phantomtrack.xyz/api/analytics?endpoint=stats', {
   method: 'GET',
   headers: {
     'X-API-KEY': 'sk_test_your_key_here'
@@ -602,7 +602,7 @@
 
                 <h3>Python (Requests)</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'import requests\n\nheaders = {\n    \'X-API-KEY\': \'sk_test_your_key_here\'\n}\n\nresponse = requests.get(\n    \'https://phantomtrack.42web.io/api/analytics\',\n    params={\'endpoint\': \'stats\'},\n    headers=headers\n)\n\ndata = response.json()\nprint(\'Analytics:\', data)')">
+                    <button class="copy-button" onclick="copyCode(this, 'import requests\n\nheaders = {\n    \'X-API-KEY\': \'sk_test_your_key_here\'\n}\n\nresponse = requests.get(\n    \'https://phantomtrack.xyz/api/analytics\',\n    params={\'endpoint\': \'stats\'},\n    headers=headers\n)\n\ndata = response.json()\nprint(\'Analytics:\', data)')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-python">import requests
@@ -612,7 +612,7 @@ headers = {
 }
 
 response = requests.get(
-    'https://phantomtrack.42web.io/api/analytics',
+    'https://phantomtrack.xyz/api/analytics',
     params={'endpoint': 'stats'},
     headers=headers
 )
@@ -623,14 +623,14 @@ print('Analytics:', data)</code></pre>
 
                 <h3>PHP (cURL)</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, '<?php\n$ch = curl_init();\n\ncurl_setopt_array($ch, [\n    CURLOPT_URL => \'https://phantomtrack.42web.io/api/analytics?endpoint=stats\',\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_HTTPHEADER => [\n        \'X-API-KEY: sk_test_your_key_here\'\n    ]\n]);\n\n$response = curl_exec($ch);\n$data = json_decode($response, true);\n\ncurl_close($ch);\n\nprint_r($data);\n?>')">
+                    <button class="copy-button" onclick="copyCode(this, '<?php\n$ch = curl_init();\n\ncurl_setopt_array($ch, [\n    CURLOPT_URL => \'https://phantomtrack.xyz/api/analytics?endpoint=stats\',\n    CURLOPT_RETURNTRANSFER => true,\n    CURLOPT_HTTPHEADER => [\n        \'X-API-KEY: sk_test_your_key_here\'\n    ]\n]);\n\n$response = curl_exec($ch);\n$data = json_decode($response, true);\n\ncurl_close($ch);\n\nprint_r($data);\n?>')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-php"><?php
 $ch = curl_init();
 
 curl_setopt_array($ch, [
-    CURLOPT_URL => 'https://phantomtrack.42web.io/api/analytics?endpoint=stats',
+    CURLOPT_URL => 'https://phantomtrack.xyz/api/analytics?endpoint=stats',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => [
         'X-API-KEY: sk_test_your_key_here'
@@ -678,7 +678,7 @@ print_r($data);
   "current_usage": 10000,
   "limit": 10000,
   "plan": "free",
-  "upgrade_url": "https://phantomtrack.42web.io/pricing"
+  "upgrade_url": "https://phantomtrack.xyz/plan"
 }</code></pre>
                 </div>
             </div>

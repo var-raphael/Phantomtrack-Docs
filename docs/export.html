@@ -938,17 +938,17 @@ $analytics_data = array (
 
                 <h3>Export via API Example</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'curl -H \'X-API-KEY: sk_live_your_production_key\' \\\n  \'https://phantomtrack.42web.io/api/analytics?endpoint=all&period=30d\' \\\n  -o analytics_export.json')">
+                    <button class="copy-button" onclick="copyCode(this, 'curl -H \'X-API-KEY: sk_live_your_production_key\' \\\n  \'https://phantomtrack.xyz/api/analytics?endpoint=all&period=30d\' \\\n  -o analytics_export.json')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-bash">curl -H 'X-API-KEY: sk_live_your_production_key' \
-  'https://phantomtrack.42web.io/api/analytics?endpoint=all&period=30d' \
+  'https://phantomtrack.xyz/api/analytics?endpoint=all&period=30d' \
   -o analytics_export.json</code></pre>
                 </div>
 
                 <h3>Automated Daily Backup (Bash Script)</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, '#!/bin/bash\n# Daily PhantomTrack backup script\n\nAPI_KEY=\'sk_live_your_production_key\'\nBACKUP_DIR=\'~/backups/phantomtrack\'\nDATE=$(date +%Y-%m-%d)\n\nmkdir -p $BACKUP_DIR\n\ncurl -H \"X-API-KEY: $API_KEY\" \\\n  \'https://phantomtrack.42web.io/api/analytics?endpoint=all&period=30d\' \\\n  -o \"$BACKUP_DIR/analytics_$DATE.json\"\n\necho \"Backup completed: analytics_$DATE.json\"')">
+                    <button class="copy-button" onclick="copyCode(this, '#!/bin/bash\n# Daily PhantomTrack backup script\n\nAPI_KEY=\'sk_live_your_production_key\'\nBACKUP_DIR=\'~/backups/phantomtrack\'\nDATE=$(date +%Y-%m-%d)\n\nmkdir -p $BACKUP_DIR\n\ncurl -H \"X-API-KEY: $API_KEY\" \\\n  \'https://phantomtrack.xyz/api/analytics?endpoint=all&period=30d\' \\\n  -o \"$BACKUP_DIR/analytics_$DATE.json\"\n\necho \"Backup completed: analytics_$DATE.json\"')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-bash">#!/bin/bash
@@ -961,7 +961,7 @@ DATE=$(date +%Y-%m-%d)
 mkdir -p $BACKUP_DIR
 
 curl -H "X-API-KEY: $API_KEY" \
-  'https://phantomtrack.42web.io/api/analytics?endpoint=all&period=30d' \
+  'https://phantomtrack.xyz/api/analytics?endpoint=all&period=30d' \
   -o "$BACKUP_DIR/analytics_$DATE.json"
 
 echo "Backup completed: analytics_$DATE.json"</code></pre>
@@ -969,7 +969,7 @@ echo "Backup completed: analytics_$DATE.json"</code></pre>
 
                 <h3>Python Export Example</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'import requests\nimport json\nfrom datetime import datetime\n\nAPI_KEY = \'sk_live_your_production_key\'\nBASE_URL = \'https://phantomtrack.42web.io/api/analytics\'\n\ndef export_analytics(endpoint=\'all\', period=\'30d\'):\n    headers = {\'X-API-KEY\': API_KEY}\n    params = {\'endpoint\': endpoint, \'period\': period}\n    \n    response = requests.get(BASE_URL, headers=headers, params=params)\n    \n    if response.status_code == 200:\n        data = response.json()\n        \n        # Save to file\n        filename = f\'analytics_{datetime.now().strftime(\"%Y%m%d_%H%M%S\")}.json\'\n        with open(filename, \'w\') as f:\n            json.dump(data, f, indent=2)\n        \n        print(f\'Export saved: {filename}\')\n        return data\n    else:\n        print(f\'Error: {response.status_code}\')\n        return None\n\n# Export all data for last 30 days\nexport_analytics()')">
+                    <button class="copy-button" onclick="copyCode(this, 'import requests\nimport json\nfrom datetime import datetime\n\nAPI_KEY = \'sk_live_your_production_key\'\nBASE_URL = \'https://phantomtrack.xyz/api/analytics\'\n\ndef export_analytics(endpoint=\'all\', period=\'30d\'):\n    headers = {\'X-API-KEY\': API_KEY}\n    params = {\'endpoint\': endpoint, \'period\': period}\n    \n    response = requests.get(BASE_URL, headers=headers, params=params)\n    \n    if response.status_code == 200:\n        data = response.json()\n        \n        # Save to file\n        filename = f\'analytics_{datetime.now().strftime(\"%Y%m%d_%H%M%S\")}.json\'\n        with open(filename, \'w\') as f:\n            json.dump(data, f, indent=2)\n        \n        print(f\'Export saved: {filename}\')\n        return data\n    else:\n        print(f\'Error: {response.status_code}\')\n        return None\n\n# Export all data for last 30 days\nexport_analytics()')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-python">import requests
@@ -977,7 +977,7 @@ import json
 from datetime import datetime
 
 API_KEY = 'sk_live_your_production_key'
-BASE_URL = 'https://phantomtrack.42web.io/api/analytics'
+BASE_URL = 'https://phantomtrack.xyz/api/analytics'
 
 def export_analytics(endpoint='all', period='30d'):
     headers = {'X-API-KEY': API_KEY}

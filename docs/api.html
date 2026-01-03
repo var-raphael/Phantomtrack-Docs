@@ -506,11 +506,11 @@
                 <p>Let's fetch your website statistics using cURL:</p>
 
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'curl -H \'X-API-KEY: sk_test_your_key_here\' \\\n  \'https://phantomtrack.42web.io/api/analytics?endpoint=stats&period=7d\'')">
+                    <button class="copy-button" onclick="copyCode(this, 'curl -H \'X-API-KEY: sk_test_your_key_here\' \\\n  \'https://phantomtrack.xyz/api/analytics?endpoint=stats&period=7d\'')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-bash">curl -H 'X-API-KEY: sk_test_your_key_here' \
-  'https://phantomtrack.42web.io/api/analytics?endpoint=stats&period=7d'</code></pre>
+  'https://phantomtrack.xyz/api/analytics?endpoint=stats&period=7d'</code></pre>
                 </div>
 
                 <h3>Example Response</h3>
@@ -664,7 +664,7 @@
                 
                 <h3>JavaScript / Node.js</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'const fetch = require(\'node-fetch\');\n\nconst API_KEY = process.env.PHANTOMTRACK_API_KEY;\n\nasync function getAnalytics() {\n  const response = await fetch(\n    \'https://phantomtrack.42web.io/api/analytics?endpoint=all&period=7d\',\n    {\n      headers: { \'X-API-KEY\': API_KEY }\n    }\n  );\n  \n  const data = await response.json();\n  return data;\n}\n\ngetAnalytics()\n  .then(data => console.log(data))\n  .catch(err => console.error(err));')">
+                    <button class="copy-button" onclick="copyCode(this, 'const fetch = require(\'node-fetch\');\n\nconst API_KEY = process.env.PHANTOMTRACK_API_KEY;\n\nasync function getAnalytics() {\n  const response = await fetch(\n    \'https://phantomtrack.xyz/api/analytics?endpoint=all&period=7d\',\n    {\n      headers: { \'X-API-KEY\': API_KEY }\n    }\n  );\n  \n  const data = await response.json();\n  return data;\n}\n\ngetAnalytics()\n  .then(data => console.log(data))\n  .catch(err => console.error(err));')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-javascript">const fetch = require('node-fetch');
@@ -673,7 +673,7 @@ const API_KEY = process.env.PHANTOMTRACK_API_KEY;
 
 async function getAnalytics() {
   const response = await fetch(
-    'https://phantomtrack.42web.io/api/analytics?endpoint=all&period=7d',
+    'https://phantomtrack.xyz/api/analytics?endpoint=all&period=7d',
     {
       headers: { 'X-API-KEY': API_KEY }
     }
@@ -690,14 +690,14 @@ getAnalytics()
 
                 <h3>Python</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'import requests\nimport os\n\nAPI_KEY = os.getenv(\'PHANTOMTRACK_API_KEY\')\nBASE_URL = \'https://phantomtrack.42web.io/api/analytics\'\n\ndef get_analytics():\n    headers = {\'X-API-KEY\': API_KEY}\n    params = {\'endpoint\': \'all\', \'period\': \'7d\'}\n    \n    response = requests.get(BASE_URL, headers=headers, params=params)\n    return response.json()\n\nif __name__ == \'__main__\':\n    data = get_analytics()\n    print(data)')">
+                    <button class="copy-button" onclick="copyCode(this, 'import requests\nimport os\n\nAPI_KEY = os.getenv(\'PHANTOMTRACK_API_KEY\')\nBASE_URL = \'https://phantomtrack.xyz/api/analytics\'\n\ndef get_analytics():\n    headers = {\'X-API-KEY\': API_KEY}\n    params = {\'endpoint\': \'all\', \'period\': \'7d\'}\n    \n    response = requests.get(BASE_URL, headers=headers, params=params)\n    return response.json()\n\nif __name__ == \'__main__\':\n    data = get_analytics()\n    print(data)')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-python">import requests
 import os
 
 API_KEY = os.getenv('PHANTOMTRACK_API_KEY')
-BASE_URL = 'https://phantomtrack.42web.io/api/analytics'
+BASE_URL = 'https://phantomtrack.xyz/api/analytics'
 
 def get_analytics():
     headers = {'X-API-KEY': API_KEY}
@@ -713,12 +713,12 @@ if __name__ == '__main__':
 
                 <h3>PHP</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, '<?php\n$api_key = getenv(\'PHANTOMTRACK_API_KEY\');\n$base_url = \'https://phantomtrack.42web.io/api/analytics\';\n\nfunction getAnalytics($api_key, $base_url) {\n    $ch = curl_init();\n    \n    curl_setopt_array($ch, [\n        CURLOPT_URL => $base_url . \'?endpoint=all&period=7d\',\n        CURLOPT_RETURNTRANSFER => true,\n        CURLOPT_HTTPHEADER => [\n            \'X-API-KEY: \' . $api_key\n        ]\n    ]);\n    \n    $response = curl_exec($ch);\n    curl_close($ch);\n    \n    return json_decode($response, true);\n}\n\n$data = getAnalytics($api_key, $base_url);\nprint_r($data);\n?>')">
+                    <button class="copy-button" onclick="copyCode(this, '<?php\n$api_key = getenv(\'PHANTOMTRACK_API_KEY\');\n$base_url = \'https://phantomtrack.xyz/api/analytics\';\n\nfunction getAnalytics($api_key, $base_url) {\n    $ch = curl_init();\n    \n    curl_setopt_array($ch, [\n        CURLOPT_URL => $base_url . \'?endpoint=all&period=7d\',\n        CURLOPT_RETURNTRANSFER => true,\n        CURLOPT_HTTPHEADER => [\n            \'X-API-KEY: \' . $api_key\n        ]\n    ]);\n    \n    $response = curl_exec($ch);\n    curl_close($ch);\n    \n    return json_decode($response, true);\n}\n\n$data = getAnalytics($api_key, $base_url);\nprint_r($data);\n?>')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-php"><?php
 $api_key = getenv('PHANTOMTRACK_API_KEY');
-$base_url = 'https://phantomtrack.42web.io/api/analytics';
+$base_url = 'https://phantomtrack.xyz/api/analytics';
 
 function getAnalytics($api_key, $base_url) {
     $ch = curl_init();
@@ -847,7 +847,7 @@ print_r($data);
   "current_usage": 10000,
   "limit": 10000,
   "plan": "free",
-  "upgrade_url": "https://phantomtrack.42web.io/pricing"
+  "upgrade_url": "https://phantomtrack.xyz/plan"
 }</code></pre>
                 </div>
 
