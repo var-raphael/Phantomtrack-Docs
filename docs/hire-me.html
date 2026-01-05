@@ -101,7 +101,7 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 32px;
+            overflow: hidden;
             margin-bottom: 24px;
             transition: all 0.3s ease;
         }
@@ -110,6 +110,17 @@
             border-color: var(--accent1);
             transform: translateY(-4px);
             box-shadow: 0 8px 32px rgba(99, 102, 241, 0.2);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .project-content {
+            padding: 32px;
         }
         
         .project-header {
@@ -173,6 +184,13 @@
             left: 0;
             color: var(--accent1);
             font-weight: bold;
+        }
+        
+        .project-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
         
         .skills-grid {
@@ -263,8 +281,13 @@
             .cta-buttons, .contact-methods {
                 flex-direction: column;
             }
+            
+            .project-image {
+                height: 200px;
+            }
         }
     </style>
+    <script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=track_9ki2a8i831xwgto5exz7e"></script>
 </head>
 <body data-theme="dark">
     
@@ -343,144 +366,150 @@
             <h2 class="section-title">Featured Projects</h2>
             <p class="section-subtitle">Real-world applications built with modern technologies</p>
             
+            <!-- PhantomTrack -->
             <div class="project-card">
-                <div class="project-header">
-                    <i class="fa fa-chart-line project-icon"></i>
-                    <h3 class="project-title">PhantomTrack</h3>
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=300&fit=crop" alt="PhantomTrack Analytics Dashboard" class="project-image">
+                <div class="project-content">
+                    <div class="project-header">
+                        <i class="fa fa-chart-line project-icon"></i>
+                        <h3 class="project-title">PhantomTrack</h3>
+                    </div>
+                    <div class="project-tech">
+                        <span class="project-tech-badge">PHP</span>
+                        <span class="project-tech-badge">MySQL</span>
+                        <span class="project-tech-badge">REST API</span>
+                        <span class="project-tech-badge">JavaScript</span>
+                    </div>
+                    <p class="project-description">
+                        A frictionless web analytics SaaS platform that provides instant traffic insights without signup requirements. Built to be privacy-focused, fast, and developer-friendly with multiple integration options.
+                    </p>
+                    <ul class="project-highlights">
+                        <li>Architected and built complete SaaS platform from scratch using PHP and MySQL</li>
+                        <li>Implemented real-time analytics tracking with custom JavaScript SDK</li>
+                        <li>Designed RESTful API for programmatic data access and third-party integrations</li>
+                        <li>Built iframe embedding system for dashboard integration</li>
+                        <li>Created multi-tier subscription system with usage tracking and billing</li>
+                        <li>Implemented geo-location tracking with country tier classification (T1/T2/T3)</li>
+                        <li>Added DDoS protection and suspicious activity detection</li>
+                        <li>Integrated AI-powered weekly analytics review feature</li>
+                        <li>Supports multiple export formats (CSV, JSON, XML, Excel, PHP array)</li>
+                    </ul>
+                    <div class="project-buttons">
+                        <button class="btn" onclick="window.open('https://github.com/var-raphael/phantomtrack', '_blank')" style="background: #333;">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </button>
+                        <button class="btn" onclick="window.open('https://phantomtrack-docs.vercel.app', '_blank')">
+                            <i class="fa fa-globe"></i> Check it Out Live
+                        </button>
+                    </div>
                 </div>
-                <div class="project-tech">
-                    <span class="project-tech-badge">PHP</span>
-                    <span class="project-tech-badge">MySQL</span>
-                    <span class="project-tech-badge">REST API</span>
-                    <span class="project-tech-badge">JavaScript</span>
-                </div>
-                <p class="project-description">
-                    A frictionless web analytics SaaS platform that provides instant traffic insights without signup requirements. Built to be privacy-focused, fast, and developer-friendly with multiple integration options.
-                </p>
-                <ul class="project-highlights">
-                    <li>Architected and built complete SaaS platform from scratch using PHP and MySQL</li>
-                    <li>Implemented real-time analytics tracking with custom JavaScript SDK</li>
-                    <li>Designed RESTful API for programmatic data access and third-party integrations</li>
-                    <li>Built iframe embedding system for dashboard integration</li>
-                    <li>Created multi-tier subscription system with usage tracking and billing</li>
-                    <li>Implemented geo-location tracking with country tier classification (T1/T2/T3)</li>
-                    <li>Added DDoS protection and suspicious activity detection</li>
-                    <li>Integrated AI-powered weekly analytics review feature</li>
-                    <li>Supports multiple export formats (CSV, JSON, XML, Excel, PHP array)</li>
-                </ul>
-                <button class="btn" onclick="window.open('https://phantomtrack.xyz', '_blank')" style="background: #333; margin-top: 16px;">
-                    <i class="fab fa-globe"></i> View on Site
-                </button>
             </div>
             
+            <!-- Rate Limiter -->
             <div class="project-card">
-                <div class="project-header">
-                    <i class="fa fa-terminal project-icon"></i>
-                    <h3 class="project-title">WebHook CLI Tool</h3>
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=300&fit=crop" alt="Token Bucket Rate Limiter" class="project-image">
+                <div class="project-content">
+                    <div class="project-header">
+                        <i class="fa fa-shield-alt project-icon"></i>
+                        <h3 class="project-title">Token Bucket Rate Limiter</h3>
+                    </div>
+                    <div class="project-tech">
+                        <span class="project-tech-badge">Golang</span>
+                        <span class="project-tech-badge">REST API</span>
+                        <span class="project-tech-badge">Concurrency</span>
+                    </div>
+                    <p class="project-description">
+                        A high-performance rate limiting service built with Go using the token bucket algorithm. Handles 10,000+ requests/second with sub-millisecond latency for API traffic control and request throttling.
+                    </p>
+                    <ul class="project-highlights">
+                        <li>Built robust rate limiter using Go with token bucket algorithm</li>
+                        <li>Achieved 10,000-50,000 requests/second throughput on modest hardware</li>
+                        <li>Implemented thread-safe concurrent request handling with sync.Map</li>
+                        <li>Created RESTful JSON API for easy integration</li>
+                        <li>Added automatic memory cleanup with configurable bucket expiration</li>
+                        <li>Designed for zero external dependencies (pure Go stdlib)</li>
+                        <li>Optimized for sub-millisecond response times</li>
+                    </ul>
+                    <div class="project-buttons">
+                        <button class="btn" onclick="window.open('https://github.com/var-raphael/rate-limiter', '_blank')" style="background: #333;">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </button>
+                    </div>
                 </div>
-                <div class="project-tech">
-                    <span class="project-tech-badge">Golang</span>
-                    <span class="project-tech-badge">CLI</span>
-                    <span class="project-tech-badge">HTTP</span>
-                </div>
-                <p class="project-description">
-                    A powerful command-line tool built with Go for managing and testing webhooks efficiently. Designed for developers who need quick webhook debugging and automation capabilities.
-                </p>
-                <ul class="project-highlights">
-                    <li>Built robust CLI application using Golang with clean command structure</li>
-                    <li>Implemented webhook listener and testing functionality</li>
-                    <li>Created request logging and payload inspection features</li>
-                    <li>Added support for multiple HTTP methods and custom headers</li>
-                    <li>Designed for cross-platform compatibility (Windows, Mac, Linux)</li>
-                    <li>Optimized for performance with Go's concurrency patterns</li>
-                </ul>
-                <button class="btn" onclick="window.open('https://github.com/yourhandle/webhook-cli', '_blank')" style="background: #333; margin-top: 16px;">
-                    <i class="fab fa-github"></i> View on GitHub
-                </button>
             </div>
             
+            <!-- PhantomNotes -->
             <div class="project-card">
-                <div class="project-header">
-                    <i class="fa fa-robot project-icon"></i>
-                    <h3 class="project-title">AI-Powered Web Scraping Tool</h3>
+                <img src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800&h=300&fit=crop" alt="PhantomNotes AI Summarizer" class="project-image">
+                <div class="project-content">
+                    <div class="project-header">
+                        <i class="fa fa-file-alt project-icon"></i>
+                        <h3 class="project-title">PhantomNotes</h3>
+                    </div>
+                    <div class="project-tech">
+                        <span class="project-tech-badge">Python</span>
+                        <span class="project-tech-badge">AI/ML</span>
+                        <span class="project-tech-badge">NLP</span>
+                        <span class="project-tech-badge">React</span>
+                    </div>
+                    <p class="project-description">
+                        An AI-powered document summarization tool that transforms PDFs and text into intelligent, context-aware summaries. Features 10+ specialized summary types tailored for different use cases.
+                    </p>
+                    <ul class="project-highlights">
+                        <li>Integrated advanced NLP and AI models for intelligent document analysis</li>
+                        <li>Built 10+ specialized summary types (student notes, research, business, legal, etc.)</li>
+                        <li>Implemented PDF parsing with support for files up to 50MB</li>
+                        <li>Created clean React-based UI with drag-and-drop functionality</li>
+                        <li>Added automatic file cleanup with 1-hour retention policy</li>
+                        <li>Designed privacy-focused architecture with no permanent storage</li>
+                        <li>Optimized processing pipeline for 5-30 second summarization</li>
+                    </ul>
+                    <div class="project-buttons">
+                        <button class="btn" onclick="window.open('https://github.com/var-raphael/phantomnotes', '_blank')" style="background: #333;">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </button>
+                        <button class="btn" onclick="window.open('https://phantom-notes.onrender.com', '_blank')">
+                            <i class="fa fa-globe"></i> Check it Out Live
+                        </button>
+                    </div>
                 </div>
-                <div class="project-tech">
-                    <span class="project-tech-badge">Python</span>
-                    <span class="project-tech-badge">AI/ML</span>
-                    <span class="project-tech-badge">BeautifulSoup</span>
-                    <span class="project-tech-badge">Selenium</span>
-                </div>
-                <p class="project-description">
-                    An intelligent web scraping solution that combines Python's scraping capabilities with AI assistance for data extraction, cleaning, and formatting. Automates complex data gathering workflows.
-                </p>
-                <ul class="project-highlights">
-                    <li>Developed comprehensive web scraping system using Python libraries</li>
-                    <li>Integrated AI for intelligent data extraction and pattern recognition</li>
-                    <li>Implemented automatic data formatting and cleaning pipelines</li>
-                    <li>Built support for dynamic JavaScript-heavy websites using Selenium</li>
-                    <li>Created export functionality for multiple data formats</li>
-                    <li>Added error handling and retry mechanisms for reliability</li>
-                    <li>Designed modular architecture for easy customization</li>
-                </ul>
-                <button class="btn" onclick="window.open('https://github.com/yourhandle/ai-web-scraper', '_blank')" style="background: #333; margin-top: 16px;">
-                    <i class="fab fa-github"></i> View on GitHub
-                </button>
             </div>
             
+            <!-- VibeKit -->
             <div class="project-card">
-                <div class="project-header">
-                    <i class="fa fa-image project-icon"></i>
-                    <h3 class="project-title">VibeKit</h3>
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=300&fit=crop" alt="VibeKit Content Creator" class="project-image">
+                <div class="project-content">
+                    <div class="project-header">
+                        <i class="fa fa-palette project-icon"></i>
+                        <h3 class="project-title">VibeKit</h3>
+                    </div>
+                    <div class="project-tech">
+                        <span class="project-tech-badge">Next.js</span>
+                        <span class="project-tech-badge">TypeScript</span>
+                        <span class="project-tech-badge">React</span>
+                        <span class="project-tech-badge">Canvas API</span>
+                    </div>
+                    <p class="project-description">
+                        A modern web application for creating aesthetic social media content with no sign-up required. Features quote poster maker, Instagram carousel creator, and auto blur image tools.
+                    </p>
+                    <ul class="project-highlights">
+                        <li>Built full-stack application using Next.js 13+ with App Router and TypeScript</li>
+                        <li>Implemented canvas-based image generation and manipulation</li>
+                        <li>Created quote poster maker with customizable fonts, colors, and templates</li>
+                        <li>Developed Instagram carousel creator with multi-slide support</li>
+                        <li>Built auto blur image tool with adjustable intensity controls</li>
+                        <li>Designed privacy-focused client-side processing (no server uploads)</li>
+                        <li>Implemented responsive design optimized for mobile and desktop</li>
+                    </ul>
+                    <div class="project-buttons">
+                        <button class="btn" onclick="window.open('https://github.com/var-raphael/vibekit', '_blank')" style="background: #333;">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </button>
+                        <button class="btn" onclick="window.open('https://getvibekit.vercel.app', '_blank')">
+                            <i class="fa fa-globe"></i> Check it Out Live
+                        </button>
+                    </div>
                 </div>
-                <div class="project-tech">
-                    <span class="project-tech-badge">Next.js</span>
-                    <span class="project-tech-badge">TypeScript</span>
-                    <span class="project-tech-badge">React</span>
-                    <span class="project-tech-badge">TSX</span>
-                </div>
-                <p class="project-description">
-                    A modern web application for creating Instagram carousels and quote card posters. Built with Next.js and TypeScript for optimal performance and type safety.
-                </p>
-                <ul class="project-highlights">
-                    <li>Built full-stack application using Next.js 13+ with App Router</li>
-                    <li>Implemented canvas-based image generation and manipulation</li>
-                    <li>Created intuitive drag-and-drop interface with React components</li>
-                    <li>Developed template system for quick carousel creation</li>
-                    <li>Added export functionality for Instagram-optimized images</li>
-                    <li>Utilized TypeScript for type safety and better developer experience</li>
-                    <li>Implemented responsive design for mobile and desktop usage</li>
-                </ul>
-                <button class="btn" onclick="window.open('https://github.com/yourhandle/vibekit', '_blank')" style="background: #333; margin-top: 16px;">
-                    <i class="fab fa-github"></i> View on GitHub
-                </button>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fa fa-shopping-cart project-icon"></i>
-                    <h3 class="project-title">Furniture E-Commerce Platform</h3>
-                </div>
-                <div class="project-tech">
-                    <span class="project-tech-badge">PHP</span>
-                    <span class="project-tech-badge">MySQL</span>
-                    <span class="project-tech-badge">JavaScript</span>
-                    <span class="project-tech-badge">Payment Gateway</span>
-                </div>
-                <p class="project-description">
-                    A complete e-commerce solution for furniture retail with inventory management, shopping cart, and secure payment processing. Focused on user experience and conversion optimization.
-                </p>
-                <ul class="project-highlights">
-                    <li>Developed full e-commerce platform with product catalog and search</li>
-                    <li>Implemented shopping cart and checkout flow with session management</li>
-                    <li>Integrated payment gateway for secure online transactions</li>
-                    <li>Built admin dashboard for inventory and order management</li>
-                    <li>Created responsive product gallery with image zoom functionality</li>
-                    <li>Added user authentication and order tracking features</li>
-                    <li>Optimized database queries for fast product filtering and search</li>
-                </ul>
-                <button class="btn" onclick="window.open('https://github.com/yourhandle/furniture-ecommerce', '_blank')" style="background: #333; margin-top: 16px;">
-                    <i class="fab fa-github"></i> View on GitHub
-                </button>
             </div>
         </div>
         
@@ -554,7 +583,7 @@
                 <button class="btn" style="background: #1DA1F2;" onclick="alert('Twitter: @codephantom')">
                     <i class="fab fa-x-twitter"></i> Twitter
                 </button>
-                <button class="btn" style="background: #333;" onclick="window.open('https://github.com/yourhandle', '_blank')">
+                <button class="btn" style="background: #333;" onclick="window.open('https://github.com/var-raphael', '_blank')">
                     <i class="fab fa-github"></i> GitHub
                 </button>
                 <button class="btn" style="background: #0A66C2;" onclick="alert('LinkedIn: linkedin.com/in/codephantom')">
