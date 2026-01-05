@@ -232,10 +232,10 @@
         <div class="hero">
             <h1>Instant Analytics.<br>No Friction.</h1>
             <p class="w3-large">Track your website traffic in 30 seconds. No signup. No cookies. No BS.</p><br>
-            <button class="btn" onclick="window.location.href='https://phantomtrack.xyz/dashboard'">
-                Start Analytics
-                <span class="arrow"><i class="fa fa-arrow-right"></i></span>
-            </button>
+            <button class="btn" onclick="startAnalytics()">
+    Start Analytics
+    <span class="arrow"><i class="fa fa-arrow-right"></i></span>
+</button>
         </div>
         
         <div class="card-grid">
@@ -655,5 +655,16 @@
     </div>
     
     <script src="assets/js/toogle.js"></script>
+    <script>
+function startAnalytics() {
+    // Fire analytics event
+    phantom.track('Dashboad_Link_clicked');
+
+    // Small delay ensures event is sent before redirect
+    setTimeout(() => {
+        window.location.href = 'https://phantomtrack.xyz/dashboard';
+    }, 150);
+}
+</script>
 </body>
 </html>

@@ -454,22 +454,22 @@ Tracking stops until next billing cycle. Upgrade for continued tracking.
 ## 📚 Documentation
 
 ### Getting Started
-- [Overview](https://phantomtrack-docs.vercel.app/docs.html)
-- [Quick Start Guide](https://phantomtrack-docs.vercel.app/quickstart.html)
+- [Overview](https://phantomtrack-docs.vercel.app/docs/index.html)
+- [Quick Start Guide](https://phantomtrack-docs.vercel.app/docs/quickstart.html)
 
 ### Features
-- [Custom Events](https://phantomtrack-docs.vercel.app/custom-events.html)
-- [Export Options](https://phantomtrack-docs.vercel.app/export.html)
-- [API Access](https://phantomtrack-docs.vercel.app/api.html)
-- [Embed Iframe](https://phantomtrack-docs.vercel.app/iframe.html)
+- [Custom Events](https://phantomtrack-docs.vercel.app/docs/custom-events.html)
+- [Export Options](https://phantomtrack-docs.vercel.app/docs/export.html)
+- [API Access](https://phantomtrack-docs.vercel.app/docs/api.html)
+- [Embed Iframe](https://phantomtrack-docs.vercel.app/docs/iframe.html)
 
 ### API Documentation
-- [Authentication](https://phantomtrack-docs.vercel.app/authentication.html)
-- [Endpoints](https://phantomtrack-docs.vercel.app/endpoints.html)
+- [Authentication](https://phantomtrack-docs.vercel.app/docs/authentication.html)
+- [Endpoints](https://phantomtrack-docs.vercel.app/docs/endpoints.html)
 
 ### Help & Support
-- [Get Support](https://phantomtrack-docs.vercel.app/support.html)
-- [Hire Me](https://phantomtrack-docs.vercel.app/hire-me.html)
+- [Get Support](https://phantomtrack-docs.vercel.app/docs/support.html)
+- [Hire Me](https://phantomtrack-docs.vercel.app/docs/hire-me.html)
 
 ---
 
@@ -510,7 +510,7 @@ If PhantomTrack helps you understand your audience better:
 - ⭐ Share with your developer friends
 - 🐦 Tweet about it
 - 💰 Grab the lifetime deal
-- ☕ [Hire the developer](https://phantomtrack-docs.vercel.app/hire-me.html)
+- ☕ [Hire the developer](https://phantomtrack-docs.vercel.app/docs/hire-me.html)
 
 ---
 
