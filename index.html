@@ -192,125 +192,6 @@
             font-weight: 600;
         }
 
-        /* Stats Bar */
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            padding: 24px;
-            background: var(--card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            margin: 40px auto;
-            max-width: 800px;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 32px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            opacity: 0.7;
-            margin-top: 4px;
-        }
-
-        .live-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            background: rgba(16, 185, 129, 0.1);
-            border-radius: 20px;
-            font-size: 12px;
-            color: #10b981;
-            font-weight: 600;
-        }
-
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Testimonials */
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin: 40px 0;
-        }
-
-        .testimonial {
-            background: var(--card);
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .testimonial-text {
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .testimonial-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .testimonial-info {
-            flex: 1;
-        }
-
-        .testimonial-name {
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        .testimonial-role {
-            font-size: 13px;
-            opacity: 0.6;
-        }
-
-        .testimonial-stars {
-            color: #fbbf24;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
         @media (max-width: 768px) {
             .card-grid {
                 grid-template-columns: 1fr;
@@ -328,14 +209,6 @@
             .comparison-table td {
                 padding: 12px 8px;
                 font-size: 14px;
-            }
-
-            .stats-bar {
-                gap: 20px;
-            }
-
-            .stat-number {
-                font-size: 24px;
             }
         }
     </style>
@@ -363,23 +236,6 @@
                 <span class="arrow"><i class="fa fa-arrow-right"></i></span>
             </button>
         </div>
-        
-        <div class="stats-bar">
-    <div class="stat-item">
-        <div class="stat-number" id="totalUsers">0</div>
-        <div class="stat-label">Active Users</div>
-    </div>
-    <div class="stat-item">
-        <div class="stat-number" id="totalLikes">0</div>
-        <div class="stat-label">Community Likes</div>
-    </div>
-    <div class="stat-item">
-        <span class="live-indicator">
-            <span class="live-dot"></span>
-            LIVE
-        </span>
-    </div>
-</div>
         
         <div class="card-grid">
             <div class="card">
@@ -418,85 +274,6 @@
                 <p>Export data in CSV, JSON, XML, Excel, PHP array, HTML, or plain text. Your data, your way.</p>
             </div>
         </div>
-
-        <section style="margin-top: 80px;">
-            <h2 style="text-align: center; font-weight: 600;">Built for Developers, By a Developer</h2>
-            <p class="subtitle">Simple analytics without the enterprise bloat</p>
-
-            <div class="testimonial-grid">
-                <div class="testimonial">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"The setup is ridiculously simple. No OAuth dance, no complex configs. Just drop in a script tag and you're done. Exactly what indie hackers need."</p>
-                    <div class="testimonial-author">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
-                        <div class="testimonial-info">
-                            <div class="testimonial-name">Early Adopter</div>
-                            <div class="testimonial-role">Solo Developer</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Finally, analytics pricing that makes sense. I'm not paying $50/month for a side project that makes $0. The free tier is perfect for testing."</p>
-                    <div class="testimonial-author">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
-                        <div class="testimonial-info">
-                            <div class="testimonial-name">Beta Tester</div>
-                            <div class="testimonial-role">Indie Maker</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"The JSON API is clean and simple. No 50-page documentation to read. Just hit the endpoint and get your data. Love it."</p>
-                    <div class="testimonial-author">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=George" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
-                        <div class="testimonial-info">
-                            <div class="testimonial-name">Launch Week User</div>
-                            <div class="testimonial-role">Frontend Dev</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial">
-                    <div class="testimonial-stars">★★★★☆</div>
-                    <p class="testimonial-text">"It's new but the core features work great. Country tier tracking is unique and actually useful for ad campaigns. Looking forward to seeing it grow."</p>
-                    <div class="testimonial-author">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maya" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
-                        <div class="testimonial-info">
-                            <div class="testimonial-name">Early User</div>
-                            <div class="testimonial-role">Marketing Freelancer</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Grabbed the lifetime deal. At $20, it's a no-brainer even if I don't use it right away. Supporting new indie projects is always worth it."</p>
-                    <div class="testimonial-author">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sam" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
-                        <div class="testimonial-info">
-                            <div class="testimonial-name">Launch Supporter</div>
-                            <div class="testimonial-role">SaaS Builder</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"The iframe embed is genius. I can show analytics on my public dashboard without building anything. Saved me hours of dev time."</p>
-                    <div class="testimonial-author">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Luna" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
-                        <div class="testimonial-info">
-                            <div class="testimonial-name">Week 1 User</div>
-                            <div class="testimonial-role">Product Designer</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section style="margin-top: 80px;">
             <h2 style="text-align: center; font-weight: 600;">Why Choose PhantomTrack?</h2>
@@ -798,7 +575,7 @@
                     <h3>FAQ</h3>
                     <p>Common questions about data retention, privacy, API access, and troubleshooting tracking issues.</p>
                     <br>
-                    <button class="btn" onclick="window.location.href='docs/support.html">View FAQ</button>
+                    <button class="btn" onclick="window.location.href='docs/support.html'">View FAQ</button>
                 </div>
 
                 <div class="card">
@@ -871,68 +648,5 @@
     </div>
     
     <script src="assets/js/toogle.js"></script>
-    <script>
-window.addEventListener('load', () => {
-    const usersEl = document.getElementById('totalUsers');
-    const likesEl = document.getElementById('totalLikes');
-    
-    // Function to get or generate user count
-    function getUserCount() {
-        const now = Date.now();
-        const stored = localStorage.getItem('phantomtrack_users');
-        
-        if (stored) {
-            const data = JSON.parse(stored);
-            const fiveMinutes = 5 * 60 * 1000; // 5 minutes in milliseconds
-            
-            // Check if 5 minutes have passed
-            if (now - data.timestamp < fiveMinutes) {
-                return data.count;
-            }
-        }
-        
-        // Generate new random count (1-50)
-        const newCount = Math.floor(Math.random() * 50) + 1;
-        localStorage.setItem('phantomtrack_users', JSON.stringify({
-            count: newCount,
-            timestamp: now
-        }));
-        
-        return newCount;
-    }
-    
-    const userTarget = getUserCount();
-    const likeTarget = 116; // Fixed likes count
-    const duration = 1500;
-    
-    // Animate users
-    let userCount = 0;
-    const userIncrement = userTarget / (duration / 16);
-    
-    const userTimer = setInterval(() => {
-        userCount += userIncrement;
-        if (userCount >= userTarget) {
-            usersEl.textContent = userTarget;
-            clearInterval(userTimer);
-        } else {
-            usersEl.textContent = Math.floor(userCount);
-        }
-    }, 16);
-    
-    // Animate likes
-    let likeCount = 0;
-    const likeIncrement = likeTarget / (duration / 16);
-    
-    const likeTimer = setInterval(() => {
-        likeCount += likeIncrement;
-        if (likeCount >= likeTarget) {
-            likesEl.textContent = likeTarget;
-            clearInterval(likeTimer);
-        } else {
-            likesEl.textContent = Math.floor(likeCount);
-        }
-    }, 16);
-});
-</script>
 </body>
 </html>
