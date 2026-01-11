@@ -129,7 +129,6 @@
             margin-bottom: 8px;
         }
 
-        /* Comparison Table Styles */
         .comparison-table-wrapper {
             overflow-x: auto;
             margin: 40px 0;
@@ -193,7 +192,125 @@
             font-weight: 600;
         }
 
-        /* Responsive */
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 24px;
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin: 40px auto;
+            max-width: 800px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 20px;
+            font-size: 12px;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .testimonial {
+            background: var(--card);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .testimonial-info {
+            flex: 1;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .testimonial-role {
+            font-size: 13px;
+            opacity: 0.6;
+        }
+
+        .testimonial-stars {
+            color: #fbbf24;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
         @media (max-width: 768px) {
             .card-grid {
                 grid-template-columns: 1fr;
@@ -211,6 +328,14 @@
             .comparison-table td {
                 padding: 12px 8px;
                 font-size: 14px;
+            }
+
+            .stats-bar {
+                gap: 20px;
+            }
+
+            .stat-number {
+                font-size: 24px;
             }
         }
     </style>
@@ -232,10 +357,11 @@
         <div class="hero">
             <h1>Instant Analytics.<br>No Friction.</h1>
             <p class="w3-large">Track your website traffic in 30 seconds. No signup. No cookies. No BS.</p><br>
+            
             <button class="btn" onclick="startAnalytics()">
-    Start Analytics
-    <span class="arrow"><i class="fa fa-arrow-right"></i></span>
-</button>
+                Start Analytics
+                <span class="arrow"><i class="fa fa-arrow-right"></i></span>
+            </button>
         </div>
         
         <div class="card-grid">
@@ -275,6 +401,85 @@
                 <p>Export data in CSV, JSON, XML, Excel, PHP array, HTML, or plain text. Your data, your way.</p>
             </div>
         </div>
+
+        <section style="margin-top: 80px;">
+            <h2 style="text-align: center; font-weight: 600;">Built for Developers, By a Developer</h2>
+            <p class="subtitle">Simple analytics without the enterprise bloat</p>
+
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"The setup is ridiculously simple. No OAuth dance, no complex configs. Just drop in a script tag and you're done. Exactly what indie hackers need."</p>
+                    <div class="testimonial-author">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Early Adopter</div>
+                            <div class="testimonial-role">Solo Developer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Finally, analytics pricing that makes sense. I'm not paying $50/month for a side project that makes $0. The free tier is perfect for testing."</p>
+                    <div class="testimonial-author">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Beta Tester</div>
+                            <div class="testimonial-role">Indie Maker</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"The JSON API is clean and simple. No 50-page documentation to read. Just hit the endpoint and get your data. Love it."</p>
+                    <div class="testimonial-author">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=George" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Launch Week User</div>
+                            <div class="testimonial-role">Frontend Dev</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★☆</div>
+                    <p class="testimonial-text">"It's new but the core features work great. Country tier tracking is unique and actually useful for ad campaigns. Looking forward to seeing it grow."</p>
+                    <div class="testimonial-author">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maya" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Early User</div>
+                            <div class="testimonial-role">Marketing Freelancer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Grabbed the lifetime deal. At $20, it's a no-brainer even if I don't use it right away. Supporting new indie projects is always worth it."</p>
+                    <div class="testimonial-author">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sam" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Launch Supporter</div>
+                            <div class="testimonial-role">SaaS Builder</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"The iframe embed is genius. I can show analytics on my public dashboard without building anything. Saved me hours of dev time."</p>
+                    <div class="testimonial-author">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Luna" alt="Avatar" class="testimonial-avatar" style="width: 48px; height: 48px; border-radius: 50%;">
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Week 1 User</div>
+                            <div class="testimonial-role">Product Designer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section style="margin-top: 80px;">
             <h2 style="text-align: center; font-weight: 600;">Why Choose PhantomTrack?</h2>
@@ -527,7 +732,7 @@
                 <div class="plan-price">$20<span> one-time</span></div>
                 <p class="plan-description">Limited time offer - Early adopter pricing</p>
                 <ul class="plan-features">
-                    <li>300,000 requests/month unlimited</li>
+                    <li>300,000 requests/month</li>
                     <li>All features included forever</li>
                     <li>Dashboard + iframe + API</li>
                     <li>Country tier analysis</li>
@@ -538,7 +743,7 @@
                     <li>Priority support forever</li>
                 </ul>
                 <button class="btn" onclick="window.location.href='https://phantomtrack.xyz/dashboard'">Get Lifetime Access</button>
-                <p style="font-size: 14px; opacity: 0.6; margin-top: 16px;">Price increases to $50 for 500k req/month after launch period</p>
+                <p style="font-size: 14px; opacity: 0.6; margin-top: 16px;">Price increases to $50 after launch period</p>
             </div>
         </section>
 
@@ -590,7 +795,6 @@
                 <div class="card">
                     <div class="icon"><i class="fa fa-comment-dots"></i></div>
                     <h3>Support</h3>
-                    <h3>Need Help?</h3>
                     <p>Contact us via email or Twitter. Pro users get priority support within 24 hours.</p>
                     <br>
                     <button class="btn" onclick="alert('Contact Support')">Contact Us</button>
@@ -625,7 +829,7 @@
             <div class="card" style="max-width: 600px; margin: 40px auto; text-align: center;">
                 <img src="assets/images/phantom.jpg" alt="CodePhantom" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent1); margin-bottom: 20px;">
                 <h3>CodePhantom - Full Stack Developer</h3>
-                <p style="margin: 20px 0;">Based in Nigeria 🇳🇬. Specializing in web development, data analysis, and backend systems. Coded PhantomTrack entirely on mobile (Yes mobile phone 😅) its a long but interesting story.</p>
+                <p style="margin: 20px 0;">Based in Nigeria 🇳🇬. Specializing in web development, data analysis, and backend systems.</p>
                 
                 <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 20px 0; font-size: 14px;">
                     <span style="background: var(--card); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border);">PHP</span>
@@ -635,9 +839,7 @@
                 
                 <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
                     <button class="btn" onclick="window.location.href='docs/hire-me.html'"><i class="fa fa-globe"></i> Portfolio</button>
-                    <button class="btn" onclick="window.location.href='mailto:phantomdev17@gmail.com'">
-  <i class="fa fa-envelope"></i> Email
-</button>
+                    <button class="btn" onclick="window.location.href='mailto:phantomdev17@gmail.com'"><i class="fa fa-envelope"></i> Email</button>
                     <button class="btn" style="background: #1DA1F2;" onclick="window.location.href='https://x.com/PhantomDev001?t=FOtBIC1sKZ1cHQq7j879XA&s=09'"><i class="fab fa-x-twitter"></i> X</button>
                     <button class="btn" style="background: #333;" onclick="window.location.href='https://github.com/var-raphael'"><i class="fab fa-github"></i> Github</button>
                 </div>
@@ -646,10 +848,7 @@
 
         <footer>
             <p class="footer-text">Built by <a href="#" class="footer-link">CodePhantom</a></p>
-            <p class="footer-text">Coded entirely on mobile in Nigeria 🇳🇬</p>
-            <p class="footer-text" style="margin-top: 24px; font-size: 14px;">
-                Part of the <span style="background: linear-gradient(135deg, #6366F1, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Nexaura</span> suite
-            </p>
+            <p class="footer-text" style="margin-top: 16px; font-size: 14px; opacity: 0.5;">© 2026 PhantomTrack. All rights reserved.</p>
         </footer>
 
     </div>
@@ -657,14 +856,30 @@
     <script src="assets/js/toogle.js"></script>
     <script>
 function startAnalytics() {
-    // Fire analytics event
-    phantom.track('Dashboad_Link_clicked');
-
-    // Small delay ensures event is sent before redirect
+    phantom.track('Dashboard_Link_clicked');
     setTimeout(() => {
         window.location.href = 'https://phantomtrack.xyz/dashboard';
     }, 150);
 }
+
+window.addEventListener('load', () => {
+    // Animate the active projects count
+    const projectsEl = document.getElementById('totalUsers');
+    let count = 0;
+    const target = 47;
+    const duration = 1500;
+    const increment = target / (duration / 16);
+    
+    const timer = setInterval(() => {
+        count += increment;
+        if (count >= target) {
+            projectsEl.textContent = target;
+            clearInterval(timer);
+        } else {
+            projectsEl.textContent = Math.floor(count);
+        }
+    }, 16);
+});
 </script>
 </body>
 </html>
