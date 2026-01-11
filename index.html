@@ -648,5 +648,16 @@
     </div>
     
     <script src="assets/js/toogle.js"></script>
+    <script>
+    function startAnalytics() {
+    // Fire analytics event
+    phantom.track('Dashboad_Link_clicked');
+
+    // Small delay ensures event is sent before redirect
+    setTimeout(() => {
+        window.location.href = 'https://phantomtrack.xyz/dashboard';
+    }, 150);
+}
+</script>
 </body>
 </html>
