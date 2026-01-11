@@ -901,32 +901,8 @@ window.addEventListener('load', () => {
         return newCount;
     }
     
-    // Function to get or generate likes count
-    function getLikesCount() {
-        const now = Date.now();
-        const stored = localStorage.getItem('phantomtrack_likes');
-        
-        if (stored) {
-            const data = JSON.parse(stored);
-            const fiveMinutes = 5 * 60 * 1000;
-            
-            if (now - data.timestamp < fiveMinutes) {
-                return data.count;
-            }
-        }
-        
-        // Generate new random count (50-150)
-        const newCount = Math.floor(Math.random() * 101) + 50;
-        localStorage.setItem('phantomtrack_likes', JSON.stringify({
-            count: newCount,
-            timestamp: now
-        }));
-        
-        return newCount;
-    }
-    
     const userTarget = getUserCount();
-    const likeTarget = getLikesCount();
+    const likeTarget = 116; // Fixed likes count
     const duration = 1500;
     
     // Animate users
