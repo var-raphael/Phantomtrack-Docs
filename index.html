@@ -364,6 +364,23 @@
             </button>
         </div>
         
+        <div class="stats-bar">
+    <div class="stat-item">
+        <div class="stat-number" id="totalUsers">0</div>
+        <div class="stat-label">Active Users</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number" id="totalLikes">0</div>
+        <div class="stat-label">Community Likes</div>
+    </div>
+    <div class="stat-item">
+        <span class="live-indicator">
+            <span class="live-dot"></span>
+            LIVE
+        </span>
+    </div>
+</div>
+        
         <div class="card-grid">
             <div class="card">
                 <div class="icon"><i class="fa fa-bolt"></i></div>
@@ -757,7 +774,7 @@
                     <h3>Getting Started</h3>
                     <p>Learn how to generate your tracking ID and install PhantomTrack on your website in under 2 minutes.</p>
                     <br>
-                    <button class="btn" onclick="alert('View Getting Started Guide')">Read Guide</button>
+                    <button class="btn" onclick="window.location.href='docs/'">Read Guide</button>
                 </div>
 
                 <div class="card">
@@ -765,7 +782,7 @@
                     <h3>Integration Guide</h3>
                     <p>Step-by-step tutorials for WordPress, React, Next.js, and more. Copy-paste ready code examples.</p>
                     <br>
-                    <button class="btn" onclick="alert('View Integration Guide')">View Integrations</button>
+                    <button class="btn" onclick="window.location.href='docs/quickstart.html'">View Integrations</button>
                 </div>
 
                 <div class="card">
@@ -773,7 +790,7 @@
                     <h3>Payment & Billing</h3>
                     <p>How to upgrade, manage your subscription, and handle billing issues. Paystack integration help.</p>
                     <br>
-                    <button class="btn" onclick="alert('View Payment Help')">Payment Help</button>
+                    <button class="btn" onclick="window.location.href='mailto:phantomdev17@gmail.com'">Payment Help</button>
                 </div>
 
                 <div class="card">
@@ -781,7 +798,7 @@
                     <h3>FAQ</h3>
                     <p>Common questions about data retention, privacy, API access, and troubleshooting tracking issues.</p>
                     <br>
-                    <button class="btn" onclick="alert('View FAQ')">View FAQ</button>
+                    <button class="btn" onclick="window.location.href='docs/support.html">View FAQ</button>
                 </div>
 
                 <div class="card">
@@ -789,7 +806,7 @@
                     <h3>API Documentation</h3>
                     <p>Complete API reference for developers. Fetch analytics data programmatically with JSON endpoints.</p>
                     <br>
-                    <button class="btn" onclick="alert('View API Docs')">API Docs</button>
+                    <button class="btn" onclick="window.location.href='docs/api.html'">API Docs</button>
                 </div>
 
                 <div class="card">
@@ -797,7 +814,7 @@
                     <h3>Support</h3>
                     <p>Contact us via email or Twitter. Pro users get priority support within 24 hours.</p>
                     <br>
-                    <button class="btn" onclick="alert('Contact Support')">Contact Us</button>
+                    <button class="btn" onclick="window.location.href='mailto:phantomdev17@gmail.com'">Contact Us</button>
                 </div>
             </div>
         </section>
@@ -855,28 +872,88 @@
     
     <script src="assets/js/toogle.js"></script>
     <script>
-function startAnalytics() {
-    phantom.track('Dashboard_Link_clicked');
-    setTimeout(() => {
-        window.location.href = 'https://phantomtrack.xyz/dashboard';
-    }, 150);
-}
-
 window.addEventListener('load', () => {
-    // Animate the active projects count
-    const projectsEl = document.getElementById('totalUsers');
-    let count = 0;
-    const target = 47;
-    const duration = 1500;
-    const increment = target / (duration / 16);
+    const usersEl = document.getElementById('totalUsers');
+    const likesEl = document.getElementById('totalLikes');
     
-    const timer = setInterval(() => {
-        count += increment;
-        if (count >= target) {
-            projectsEl.textContent = target;
-            clearInterval(timer);
+    // Function to get or generate user count
+    function getUserCount() {
+        const now = Date.now();
+        const stored = localStorage.getItem('phantomtrack_users');
+        
+        if (stored) {
+            const data = JSON.parse(stored);
+            const fiveMinutes = 5 * 60 * 1000; // 5 minutes in milliseconds
+            
+            // Check if 5 minutes have passed
+            if (now - data.timestamp < fiveMinutes) {
+                return data.count;
+            }
+        }
+        
+        // Generate new random count (1-50)
+        const newCount = Math.floor(Math.random() * 50) + 1;
+        localStorage.setItem('phantomtrack_users', JSON.stringify({
+            count: newCount,
+            timestamp: now
+        }));
+        
+        return newCount;
+    }
+    
+    // Function to get or generate likes count
+    function getLikesCount() {
+        const now = Date.now();
+        const stored = localStorage.getItem('phantomtrack_likes');
+        
+        if (stored) {
+            const data = JSON.parse(stored);
+            const fiveMinutes = 5 * 60 * 1000;
+            
+            if (now - data.timestamp < fiveMinutes) {
+                return data.count;
+            }
+        }
+        
+        // Generate new random count (50-150)
+        const newCount = Math.floor(Math.random() * 101) + 50;
+        localStorage.setItem('phantomtrack_likes', JSON.stringify({
+            count: newCount,
+            timestamp: now
+        }));
+        
+        return newCount;
+    }
+    
+    const userTarget = getUserCount();
+    const likeTarget = getLikesCount();
+    const duration = 1500;
+    
+    // Animate users
+    let userCount = 0;
+    const userIncrement = userTarget / (duration / 16);
+    
+    const userTimer = setInterval(() => {
+        userCount += userIncrement;
+        if (userCount >= userTarget) {
+            usersEl.textContent = userTarget;
+            clearInterval(userTimer);
         } else {
-            projectsEl.textContent = Math.floor(count);
+            usersEl.textContent = Math.floor(userCount);
+        }
+    }, 16);
+    
+    // Animate likes
+    let likeCount = 0;
+    const likeIncrement = likeTarget / (duration / 16);
+    
+    const likeTimer = setInterval(() => {
+        likeCount += likeIncrement;
+        if (likeCount >= likeTarget) {
+            likesEl.textContent = likeTarget;
+            clearInterval(likeTimer);
+        } else {
+            likesEl.textContent = Math.floor(likeCount);
         }
     }, 16);
 });
