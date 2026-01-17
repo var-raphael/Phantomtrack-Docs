@@ -35,7 +35,8 @@
 <!-- Existing stylesheets -->
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/w3.css">
-<link rel="stylesheet" href="assets/font-awesome/icons/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
     <style>
         .hero {
             text-align: center;
@@ -267,27 +268,27 @@
         
         
         <section style="margin-top: 60px; margin-bottom: 60px;">
-    <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+    <div style="max-width: 900px; margin: 0 auto; text-align: center; padding: 0 20px;">
         <h2 style="font-weight: 600; margin-bottom: 16px;">See How It Works</h2>
         <p style="opacity: 0.7; margin-bottom: 32px; font-size: 18px;">Generate your tracking ID and start collecting analytics in 30 seconds</p>
         
-        <div style="position: relative; border-radius: 12px; border: 2px solid var(--border); box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; background: var(--card);">
-           <video 
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="metadata"
-    poster="assets/videos/demo-thumbnail.jpg"
-    style="width: 100%; display: block; max-height: 600px;">
-    <source src="assets/videos/demo.mp4" type="video/mp4">
-    <source src="assets/videos/demo.webm" type="video/webm">
-    Your browser doesn't support video playback.
-</video>
+        <div style="position: relative; width: 100%; border-radius: 12px; border: 2px solid var(--border); box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; background: var(--card);">
+            <video 
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="assets/videos/demo-thumbnail.jpg"
+                style="width: 100%; height: auto; display: block; object-fit: cover;">
+                <source src="assets/videos/demo.mp4" type="video/mp4">
+                <source src="assets/videos/demo.webm" type="video/webm">
+                Your browser doesn't support video playback.
+            </video>
         </div>
         
         <p style="font-size: 14px; opacity: 0.6; margin-top: 16px;">
-            <i class="fa fa-play-circle"></i> Click to play • 30 second demo
+            <i class="fa fa-play-circle"></i> 30 second demo • Click to pause
         </p>
     </div>
 </section>
