@@ -2,45 +2,178 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<!-- SEO Basics -->
-<title>PhantomTrack - Instant Web Analytics Without Signup</title>
-<meta name="description" content="Track your website traffic in 30 seconds. No signup, no cookies, GDPR compliant. Privacy-focused Google Analytics alternative starting at $3/month.">
-<meta name="keywords" content="web analytics, google analytics alternative, privacy analytics, no signup analytics, GDPR analytics">
-<meta name="author" content="CodePhantom">
-<link rel="canonical" href="https://phantomtrack-docs.vercel.app/">
+    <!-- SEO Basics -->
+    <title>PhantomTrack - Instant Web Analytics Without Signup</title>
+    <meta name="description" content="Track your website traffic in 30 seconds. No signup, no cookies, GDPR compliant. Privacy-focused Google Analytics alternative starting at $3/month.">
+    <meta name="keywords" content="web analytics, google analytics alternative, privacy analytics, no signup analytics, GDPR analytics">
+    <meta name="author" content="CodePhantom">
+    <link rel="canonical" href="https://phantomtrack-docs.vercel.app/">
 
-<!-- Open Graph (Facebook, LinkedIn) -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://phantomtrack-docs.vercel.app/">
-<meta property="og:title" content="PhantomTrack - Instant Web Analytics Without Signup">
-<meta property="og:description" content="Track your website traffic in 30 seconds. No signup, no cookies, GDPR compliant. Privacy-focused analytics starting at $3/month.">
-<meta property="og:image" content="https://phantomtrack-docs.vercel.app/assets/images/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://phantomtrack-docs.vercel.app/">
+    <meta property="og:title" content="PhantomTrack - Instant Web Analytics Without Signup">
+    <meta property="og:description" content="Track your website traffic in 30 seconds. No signup, no cookies, GDPR compliant. Privacy-focused analytics starting at $3/month.">
+    <meta property="og:image" content="https://phantomtrack-docs.vercel.app/assets/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@PhantomDev001">
-<meta name="twitter:creator" content="@PhantomDev001">
-<meta name="twitter:title" content="PhantomTrack - Instant Web Analytics Without Signup">
-<meta name="twitter:description" content="Track website traffic in 30 seconds. No signup, no cookies, GDPR compliant. $3/month or $20 lifetime.">
-<meta name="twitter:image" content="https://phantomtrack-docs.vercel.app/assets/images/twitter-card.jpg">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@PhantomDev001">
+    <meta name="twitter:creator" content="@PhantomDev001">
+    <meta name="twitter:title" content="PhantomTrack - Instant Web Analytics Without Signup">
+    <meta name="twitter:description" content="Track website traffic in 30 seconds. No signup, no cookies, GDPR compliant. $3/month or $20 lifetime.">
+    <meta name="twitter:image" content="https://phantomtrack-docs.vercel.app/assets/images/twitter-card.jpg">
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
-<!-- Existing stylesheets -->
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <!-- Existing stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
     <style>
         .hero {
             text-align: center;
-            padding: 100px 0 80px;
+            padding: 80px 20px 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--accent1);
+            color: var(--accent1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+        
+        .hero-title {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-problem {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            opacity: 0.9;
+            color: #ef4444;
+        }
+        
+        .hero-solution {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            opacity: 0.85;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            text-align: center;
+        }
+        
+        .hero-stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-stat-label {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        
+        .cta-container {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.5);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent1);
+            padding: 16px 32px;
+            border-radius: 8px;
+            border: 2px solid var(--accent1);
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .trust-indicators {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-top: 32px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .trust-item i {
+            color: #10b981;
         }
         
         .icon {
@@ -222,6 +355,26 @@
         }
 
         @media (max-width: 768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-problem {
+                font-size: 20px;
+            }
+            
+            .hero-solution {
+                font-size: 18px;
+            }
+            
+            .hero-stats {
+                gap: 24px;
+            }
+            
+            .hero-stat-number {
+                font-size: 24px;
+            }
+            
             .card-grid {
                 grid-template-columns: 1fr;
             }
@@ -238,6 +391,15 @@
             .comparison-table td {
                 padding: 12px 8px;
                 font-size: 14px;
+            }
+            
+            .cta-container {
+                flex-direction: column;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
@@ -257,41 +419,122 @@
     <div class="content">
         
         <div class="hero">
-            <h1>Instant Analytics.<br>No Friction.</h1>
-            <p class="w3-large">Track your website traffic in 30 seconds. No signup. No cookies. No BS.</p><br>
+            <div class="hero-badge">
+                <i class="fa fa-bolt"></i> PRIVACY-FIRST WEB ANALYTICS
+            </div>
             
-            <button class="btn" onclick="startAnalytics()">
-                Start Analytics
-                <span class="arrow"><i class="fa fa-arrow-right"></i></span>
-            </button>
+            <h1 class="hero-title">
+                Stop Wrestling With Google Analytics
+            </h1>
+            
+            <p class="hero-problem">
+                Complex setup. Privacy nightmares. Cookie consent banners. Endless configuration.
+            </p>
+            
+            <p class="hero-solution">
+                <strong>PhantomTrack</strong> is the web analytics tool that actually respects your time. Get instant insights into who visits your site, where they come from, and what they do—without creating an account, installing cookies, or dealing with GDPR headaches. One script tag. 30 seconds. Done.
+            </p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">30 sec</div>
+                    <div class="hero-stat-label">Setup time</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">0</div>
+                    <div class="hero-stat-label">Cookies used</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">100%</div>
+                    <div class="hero-stat-label">GDPR compliant</div>
+                </div>
+            </div>
+            
+            <div class="cta-container">
+                <button class="btn-primary" onclick="startAnalytics()">
+                    Start Tracking Now <i class="fa fa-arrow-right"></i>
+                </button>
+                <button class="btn-secondary" onclick="document.querySelector('video').scrollIntoView({behavior: 'smooth'})">
+                    <i class="fa fa-play"></i> Watch Demo
+                </button>
+            </div>
+            
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <i class="fa fa-check-circle"></i>
+                    <span>No signup required</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fa fa-check-circle"></i>
+                    <span>7-day money-back</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fa fa-check-circle"></i>
+                    <span>Free plan available</span>
+                </div>
+            </div>
         </div>
         
         
         <section style="margin-top: 60px; margin-bottom: 60px;">
-    <div style="max-width: 900px; margin: 0 auto; text-align: center; padding: 0 20px;">
-        <h2 style="font-weight: 600; margin-bottom: 16px;">See How It Works</h2>
-        <p style="opacity: 0.7; margin-bottom: 32px; font-size: 18px;">Generate your tracking ID and start collecting analytics in 30 seconds</p>
-        
-        <div style="position: relative; width: 100%; border-radius: 12px; border: 2px solid var(--border); box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; background: var(--card);">
-            <video 
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="metadata"
-                poster="assets/videos/demo-thumbnail.jpg"
-                style="width: 100%; height: auto; display: block; object-fit: cover;">
-                <source src="assets/videos/demo.mp4" type="video/mp4">
-                <source src="assets/videos/demo.webm" type="video/webm">
-                Your browser doesn't support video playback.
-            </video>
-        </div>
-        
-        <p style="font-size: 14px; opacity: 0.6; margin-top: 16px;">
-            <i class="fa fa-play-circle"></i> 30 second demo • Click to pause
-        </p>
-    </div>
-</section>
+            <div style="max-width: 900px; margin: 0 auto; text-align: center; padding: 0 20px;">
+                <h2 style="font-weight: 600; margin-bottom: 16px;">See How It Works</h2>
+                <p style="opacity: 0.7; margin-bottom: 32px; font-size: 18px;">Generate your tracking ID and start collecting analytics in 30 seconds</p>
+                
+                <div style="position: relative; width: 100%; border-radius: 12px; border: 2px solid var(--border); box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; background: var(--card);">
+                    <video 
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster="assets/videos/demo-thumbnail.jpg"
+                        style="width: 100%; height: auto; display: block; object-fit: cover;">
+                        <source src="assets/videos/demo.mp4" type="video/mp4">
+                        <source src="assets/videos/demo.webm" type="video/webm">
+                        Your browser doesn't support video playback.
+                    </video>
+                </div>
+                
+                <p style="font-size: 14px; opacity: 0.6; margin-top: 16px;">
+                    <i class="fa fa-play-circle"></i> 30 second demo • Click to pause
+                </p>
+            </div>
+        </section>
+
+        <section style="margin-top: 80px; margin-bottom: 60px;">
+            <div style="max-width: 1000px; margin: 0 auto; text-align: center; padding: 0 20px;">
+                <div style="display: inline-block; background: rgba(99, 102, 241, 0.1); border: 1px solid var(--accent1); color: var(--accent1); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 24px;">
+                    <i class="fa fa-signal" style="margin-right: 6px;"></i> LIVE DASHBOARD
+                </div>
+                
+                <h2 style="font-weight: 600; margin-bottom: 16px;">PhantomTrack in Action</h2>
+                <p style="opacity: 0.7; margin-bottom: 32px; font-size: 18px;">
+                    This is our actual analytics dashboard tracking this website right now. 
+                    <span style="color: var(--accent1); font-weight: 600;">Real data. Real time.</span>
+                </p>
+                
+                <div style="position: relative; width: 100%; border-radius: 12px; border: 2px solid var(--border); box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; background: var(--card); min-height: 600px;">
+                    <iframe 
+                        src="https://phantomtrack.xyz/embed?track_id=track_9ki2a8i831xwgto5exz7e"
+                        style="width: 100%; height: 700px; border: none; display: block;"
+                        title="PhantomTrack Live Analytics Dashboard"
+                        loading="lazy">
+                    </iframe>
+                </div>
+                
+                <div style="margin-top: 24px; padding: 20px; background: rgba(99, 102, 241, 0.05); border-radius: 8px; border: 1px solid var(--border);">
+                    <p style="font-size: 14px; opacity: 0.8; margin-bottom: 8px;">
+                        <i class="fa fa-chart-line" style="color: var(--accent1); margin-right: 8px;"></i>
+                        <strong>You're seeing this page's traffic right now</strong>
+                    </p>
+                    <p style="font-size: 13px; opacity: 0.6;">
+                        Track ID: <code style="background: var(--card); padding: 2px 8px; border-radius: 4px; font-family: monospace;">track_9ki2a8i831xwgto5exz7e</code>
+                        • Updates automatically • Your dashboard will look exactly like this
+                    </p>
+                </div>
+            </div>
+        </section>
         
         <div class="card-grid">
             <div class="card">
@@ -706,14 +949,11 @@
     <script src="assets/js/toogle.js"></script>
     <script>
     function startAnalytics() {
-    // Fire analytics event
-    phantom.track('Dashboad_Link_clicked');
-
-    // Small delay ensures event is sent before redirect
-    setTimeout(() => {
-        window.location.href = 'https://phantomtrack.xyz/dashboard';
-    }, 150);
-}
-</script>
+        phantom.track('Dashboad_Link_clicked');
+        setTimeout(() => {
+            window.location.href = 'https://phantomtrack.xyz/dashboard';
+        }, 150);
+    }
+    </script>
 </body>
 </html>
