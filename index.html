@@ -1067,11 +1067,11 @@
     <script src="pwa-register.js"></script>
     <script>
     function startAnalytics() {
-        phantom.track('Dashboard_Link_clicked');
-        setTimeout(() => {
-            window.location.href = 'https://phantomtrack.xyz/dashboard';
-        }, 150);
-    }
+    phantom.track('Dashboard_Link_clicked', function(success, result) {
+        
+        window.location.href = 'https://phantomtrack.xyz/dashboard';
+    });
+}
     </script>
 </body>
 </html>
