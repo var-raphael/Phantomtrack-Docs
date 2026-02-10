@@ -10,6 +10,7 @@
     <style>
         * {
             box-sizing: border-box;
+        }
         
         html, body {
             overflow-x: hidden;
@@ -395,7 +396,7 @@
         <main class="docs-content">
             <div class="docs-header">
                 <h1><i class="fas fa-mouse-pointer"></i> Custom Events Tracking</h1>
-                <p>Track button clicks, form submissions, and any user interaction on your website.</p>
+                <p>Track button clicks, form submissions, and any user interaction on your website with optional callback support.</p>
             </div>
 
             <div class="content-card">
@@ -472,6 +473,197 @@
 
                 <div class="alert">
                     <p><i class="fas fa-info-circle"></i> <strong>Properties Limit:</strong> Properties must be under 10KB (10,000 characters) total when converted to JSON.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-arrow-right"></i> Using Callbacks (Advanced)</h2>
+                <p>PhantomTrack supports callbacks that execute after your event is tracked. This is perfect for actions that should only happen after successful tracking, like redirects or showing success messages.</p>
+
+                <h3>Callback Function Signature</h3>
+                <p>Your callback receives two parameters:</p>
+                <ul>
+                    <li><code>success</code> (boolean) - <code>true</code> if tracking succeeded, <code>false</code> if it failed</li>
+                    <li><code>result</code> (object/error) - Response data on success, error object on failure</li>
+                </ul>
+
+                <h3>Basic Callback Example</h3>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'phantom.track(\'purchase_completed\', { amount: 99.99 }, function(success, result) {\n  if (success) {\n    console.log(\'Event tracked successfully!\');\n    window.location.href = \'/thank-you\';\n  } else {\n    console.error(\'Tracking failed:\', result);\n  }\n});')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">phantom.track('purchase_completed', { amount: 99.99 }, function(success, result) {
+  if (success) {
+    console.log('Event tracked successfully!');
+    window.location.href = '/thank-you';
+  } else {
+    console.error('Tracking failed:', result);
+  }
+});</code></pre>
+                </div>
+
+                <h3>Callback Without Properties</h3>
+                <p>You can skip the properties parameter if you only need the callback:</p>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'phantom.track(\'signup_clicked\', function(success) {\n  if (success) {\n    window.location.href = \'/dashboard\';\n  }\n});')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">phantom.track('signup_clicked', function(success) {
+  if (success) {
+    window.location.href = '/dashboard';
+  }
+});</code></pre>
+                </div>
+
+                <div class="alert alert-warning">
+                    <p><i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Callbacks are executed regardless of success or failure. Always check the <code>success</code> parameter before proceeding with critical actions.</p>
+                </div>
+            </div>
+
+            <h2 style="color: var(--text); font-size: 28px; margin: 60px 0 24px 0;">
+                <i class="fas fa-sync-alt" style="color: var(--accent1);"></i> Callback Use Cases
+            </h2>
+
+            <div class="content-card">
+                <h2><i class="fas fa-exchange-alt"></i> Safe Page Redirects</h2>
+                <p>Ensure events are tracked before redirecting users to another page:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'function handleSignup() {\n  phantom.track(\'signup_button_clicked\', {\n    source: \'landing_page\',\n    plan: \'pro\'\n  }, function(success, result) {\n    if (success) {\n      // Event was tracked successfully, safe to redirect\n      window.location.href = \'/signup?plan=pro\';\n    } else {\n      // Event failed but redirect anyway (optional)\n      console.warn(\'Tracking failed, redirecting anyway\');\n      window.location.href = \'/signup?plan=pro\';\n    }\n  });\n}')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">function handleSignup() {
+  phantom.track('signup_button_clicked', {
+    source: 'landing_page',
+    plan: 'pro'
+  }, function(success, result) {
+    if (success) {
+      // Event was tracked successfully, safe to redirect
+      window.location.href = '/signup?plan=pro';
+    } else {
+      // Event failed but redirect anyway (optional)
+      console.warn('Tracking failed, redirecting anyway');
+      window.location.href = '/signup?plan=pro';
+    }
+  });
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-paper-plane"></i> Form Submission with Feedback</h2>
+                <p>Show a loading state while tracking, then provide user feedback:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'function handleFormSubmit(event) {\n  event.preventDefault();\n  \n  const submitButton = document.getElementById(\'submit-btn\');\n  submitButton.disabled = true;\n  submitButton.textContent = \'Submitting...\';\n  \n  phantom.track(\'contact_form_submitted\', {\n    email: event.target.email.value,\n    subject: event.target.subject.value\n  }, function(success, result) {\n    if (success) {\n      // Show success message\n      document.getElementById(\'success-msg\').style.display = \'block\';\n      event.target.reset();\n    } else {\n      // Show error message\n      document.getElementById(\'error-msg\').style.display = \'block\';\n    }\n    \n    submitButton.disabled = false;\n    submitButton.textContent = \'Submit\';\n  });\n}')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">function handleFormSubmit(event) {
+  event.preventDefault();
+  
+  const submitButton = document.getElementById('submit-btn');
+  submitButton.disabled = true;
+  submitButton.textContent = 'Submitting...';
+  
+  phantom.track('contact_form_submitted', {
+    email: event.target.email.value,
+    subject: event.target.subject.value
+  }, function(success, result) {
+    if (success) {
+      // Show success message
+      document.getElementById('success-msg').style.display = 'block';
+      event.target.reset();
+    } else {
+      // Show error message
+      document.getElementById('error-msg').style.display = 'block';
+    }
+    
+    submitButton.disabled = false;
+    submitButton.textContent = 'Submit';
+  });
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-shopping-bag"></i> E-commerce Purchase Tracking</h2>
+                <p>Track purchases and proceed to checkout only after confirmation:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'function initiateCheckout(cartData) {\n  phantom.track(\'checkout_initiated\', {\n    cart_total: cartData.total,\n    item_count: cartData.items.length,\n    currency: \'USD\'\n  }, function(success) {\n    if (success) {\n      // Analytics tracked, proceed to payment\n      window.location.href = \'/checkout/payment\';\n    } else {\n      // Failed to track but still allow checkout\n      console.error(\'Analytics tracking failed\');\n      window.location.href = \'/checkout/payment\';\n    }\n  });\n}')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">function initiateCheckout(cartData) {
+  phantom.track('checkout_initiated', {
+    cart_total: cartData.total,
+    item_count: cartData.items.length,
+    currency: 'USD'
+  }, function(success) {
+    if (success) {
+      // Analytics tracked, proceed to payment
+      window.location.href = '/checkout/payment';
+    } else {
+      // Failed to track but still allow checkout
+      console.error('Analytics tracking failed');
+      window.location.href = '/checkout/payment';
+    }
+  });
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-bell"></i> Show Notification After Tracking</h2>
+                <p>Display a toast notification once the event is confirmed:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'function addToWishlist(productId) {\n  phantom.track(\'added_to_wishlist\', {\n    product_id: productId\n  }, function(success) {\n    if (success) {\n      showToast(\'Added to wishlist!\', \'success\');\n    } else {\n      showToast(\'Action completed (tracking unavailable)\', \'warning\');\n    }\n  });\n}\n\nfunction showToast(message, type) {\n  // Your toast notification logic\n  const toast = document.createElement(\'div\');\n  toast.className = `toast toast-${type}`;\n  toast.textContent = message;\n  document.body.appendChild(toast);\n  \n  setTimeout(() => toast.remove(), 3000);\n}')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">function addToWishlist(productId) {
+  phantom.track('added_to_wishlist', {
+    product_id: productId
+  }, function(success) {
+    if (success) {
+      showToast('Added to wishlist!', 'success');
+    } else {
+      showToast('Action completed (tracking unavailable)', 'warning');
+    }
+  });
+}
+
+function showToast(message, type) {
+  // Your toast notification logic
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  
+  setTimeout(() => toast.remove(), 3000);
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-download"></i> Download with Callback</h2>
+                <p>Track file downloads and trigger the actual download in the callback:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'function trackAndDownload(fileName, fileUrl) {\n  phantom.track(\'file_downloaded\', {\n    file_name: fileName,\n    file_type: fileName.split(\'.\').pop()\n  }, function(success) {\n    // Download regardless of tracking success\n    const link = document.createElement(\'a\');\n    link.href = fileUrl;\n    link.download = fileName;\n    link.click();\n  });\n}')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">function trackAndDownload(fileName, fileUrl) {
+  phantom.track('file_downloaded', {
+    file_name: fileName,
+    file_type: fileName.split('.').pop()
+  }, function(success) {
+    // Download regardless of tracking success
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.download = fileName;
+    link.click();
+  });
+}</code></pre>
                 </div>
             </div>
 
@@ -573,17 +765,20 @@ video.addEventListener('ended', function() {
                 <p>Track events in React components:</p>
 
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'import React from \'react\';\n\nfunction SignupButton() {\n  const handleClick = () => {\n    // Your signup logic\n    \n    window.phantom.track(\'signup_clicked\', {\n      button_location: \'header\'\n    });\n  };\n  \n  return (\n    <button onClick={handleClick}>\n      Sign Up\n    </button>\n  );\n}\n\nexport default SignupButton;')">
+                    <button class="copy-button" onclick="copyCode(this, 'import React from \'react\';\n\nfunction SignupButton() {\n  const handleClick = () => {\n    window.phantom.track(\'signup_clicked\', {\n      button_location: \'header\'\n    }, (success) => {\n      if (success) {\n        // Navigate to signup page\n        window.location.href = \'/signup\';\n      }\n    });\n  };\n  \n  return (\n    <button onClick={handleClick}>\n      Sign Up\n    </button>\n  );\n}\n\nexport default SignupButton;')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-javascript">import React from 'react';
 
 function SignupButton() {
   const handleClick = () => {
-    // Your signup logic
-    
     window.phantom.track('signup_clicked', {
       button_location: 'header'
+    }, (success) => {
+      if (success) {
+        // Navigate to signup page
+        window.location.href = '/signup';
+      }
     });
   };
   
@@ -603,7 +798,7 @@ export default SignupButton;</code></pre>
                 <p>Track events in Vue components:</p>
 
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, '<template>\n  <button @click=&quot;trackSignup&quot;>\n    Sign Up\n  </button>\n</template>\n\n<script>\nexport default {\n  methods: {\n    trackSignup() {\n      // Your signup logic\n      \n      window.phantom.track(\'signup_clicked\', {\n        component: \'SignupButton\'\n      });\n    }\n  }\n}\n</script>')">
+                    <button class="copy-button" onclick="copyCode(this, '<template>\n  <button @click=&quot;trackSignup&quot;>\n    Sign Up\n  </button>\n</template>\n\n<script>\nexport default {\n  methods: {\n    trackSignup() {\n      window.phantom.track(\'signup_clicked\', {\n        component: \'SignupButton\'\n      }, (success) => {\n        if (success) {\n          this.$router.push(\'/signup\');\n        }\n      });\n    }\n  }\n}\n</script>')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-javascript">&lt;template&gt;
@@ -616,10 +811,12 @@ export default SignupButton;</code></pre>
 export default {
   methods: {
     trackSignup() {
-      // Your signup logic
-      
       window.phantom.track('signup_clicked', {
         component: 'SignupButton'
+      }, (success) => {
+        if (success) {
+          this.$router.push('/signup');
+        }
       });
     }
   }
@@ -633,18 +830,27 @@ export default {
                 <p>Track events with jQuery:</p>
 
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, '$(document).ready(function() {\n  $(\'#signup-btn\').click(function() {\n    phantom.track(\'signup_clicked\', {\n      source: \'homepage\'\n    });\n  });\n  \n  $(\'#newsletter-form\').submit(function() {\n    phantom.track(\'newsletter_signup\');\n  });\n});')">
+                    <button class="copy-button" onclick="copyCode(this, '$(document).ready(function() {\n  $(\'#signup-btn\').click(function() {\n    phantom.track(\'signup_clicked\', {\n      source: \'homepage\'\n    }, function(success) {\n      if (success) {\n        window.location.href = \'/signup\';\n      }\n    });\n  });\n  \n  $(\'#newsletter-form\').submit(function(e) {\n    e.preventDefault();\n    phantom.track(\'newsletter_signup\', function(success) {\n      if (success) {\n        $(\'#success-message\').show();\n      }\n    });\n  });\n});')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-javascript">$(document).ready(function() {
   $('#signup-btn').click(function() {
     phantom.track('signup_clicked', {
       source: 'homepage'
+    }, function(success) {
+      if (success) {
+        window.location.href = '/signup';
+      }
     });
   });
   
-  $('#newsletter-form').submit(function() {
-    phantom.track('newsletter_signup');
+  $('#newsletter-form').submit(function(e) {
+    e.preventDefault();
+    phantom.track('newsletter_signup', function(success) {
+      if (success) {
+        $('#success-message').show();
+      }
+    });
   });
 });</code></pre>
                 </div>
@@ -660,6 +866,9 @@ export default {
                     <li>Keep event names under 100 characters</li>
                     <li>Add properties for context: product names, prices, categories</li>
                     <li>Test events in browser console first</li>
+                    <li>Use callbacks for critical workflows (redirects, confirmations)</li>
+                    <li>Always check the <code>success</code> parameter in callbacks</li>
+                    <li>Handle both success and failure cases gracefully</li>
                 </ul>
 
                 <h3 style="margin-top: 24px;">✗ DON'T:</h3>
@@ -668,7 +877,56 @@ export default {
                     <li>Use spaces in event names: use <code>button_clicked</code> not <code>button clicked</code></li>
                     <li>Send properties larger than 10KB</li>
                     <li>Track every tiny interaction (focus on important actions)</li>
+                    <li>Block user actions if tracking fails (UX first, analytics second)</li>
+                    <li>Forget to handle callback errors</li>
                 </ul>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-cogs"></i> Advanced: Error Handling in Callbacks</h2>
+                <p>Implement robust error handling for production environments:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'function trackWithRetry(eventName, properties, onSuccess, onFailure) {\n  phantom.track(eventName, properties, function(success, result) {\n    if (success) {\n      // Analytics tracked successfully\n      if (typeof onSuccess === \'function\') {\n        onSuccess(result);\n      }\n    } else {\n      // Analytics failed\n      console.error(\'PhantomTrack error:\', result);\n      \n      if (typeof onFailure === \'function\') {\n        onFailure(result);\n      } else {\n        // Default fallback: proceed anyway\n        if (typeof onSuccess === \'function\') {\n          onSuccess(null);\n        }\n      }\n    }\n  });\n}\n\n// Usage\ntrackWithRetry(\n  \'checkout_completed\',\n  { total: 149.99 },\n  function() {\n    window.location.href = \'/thank-you\';\n  },\n  function(error) {\n    // Log error but still proceed\n    console.warn(\'Proceeding despite tracking failure\');\n    window.location.href = \'/thank-you\';\n  }\n);')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">function trackWithRetry(eventName, properties, onSuccess, onFailure) {
+  phantom.track(eventName, properties, function(success, result) {
+    if (success) {
+      // Analytics tracked successfully
+      if (typeof onSuccess === 'function') {
+        onSuccess(result);
+      }
+    } else {
+      // Analytics failed
+      console.error('PhantomTrack error:', result);
+      
+      if (typeof onFailure === 'function') {
+        onFailure(result);
+      } else {
+        // Default fallback: proceed anyway
+        if (typeof onSuccess === 'function') {
+          onSuccess(null);
+        }
+      }
+    }
+  });
+}
+
+// Usage
+trackWithRetry(
+  'checkout_completed',
+  { total: 149.99 },
+  function() {
+    window.location.href = '/thank-you';
+  },
+  function(error) {
+    // Log error but still proceed
+    console.warn('Proceeding despite tracking failure');
+    window.location.href = '/thank-you';
+  }
+);</code></pre>
+                </div>
             </div>
 
             <div class="content-card">
@@ -676,11 +934,14 @@ export default {
                 <p>Open your browser console (F12) and test tracking manually:</p>
 
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'phantom.track(\'test_event\', {\n  message: \'This is a test\'\n});')">
+                    <button class="copy-button" onclick="copyCode(this, 'phantom.track(\'test_event\', {\n  message: \'This is a test\'\n}, function(success, result) {\n  console.log(\'Success:\', success);\n  console.log(\'Result:\', result);\n});')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-javascript">phantom.track('test_event', {
   message: 'This is a test'
+}, function(success, result) {
+  console.log('Success:', success);
+  console.log('Result:', result);
 });</code></pre>
                 </div>
 
@@ -688,6 +949,37 @@ export default {
 
                 <div class="alert alert-success">
                     <p><i class="fas fa-check-circle"></i> Events appear in your dashboard within seconds. Refresh to see the latest data.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2><i class="fas fa-question-circle"></i> API Reference</h2>
+                
+                <h3>phantom.track(eventName, properties, callback)</h3>
+                <p><strong>Parameters:</strong></p>
+                <ul>
+                    <li><code>eventName</code> (string, required) - Name of the event (max 100 characters)</li>
+                    <li><code>properties</code> (object, optional) - Event properties (max 10KB when JSON-stringified)</li>
+                    <li><code>callback</code> (function, optional) - Callback function(success, result)</li>
+                </ul>
+
+                <p style="margin-top: 16px;"><strong>Callback Parameters:</strong></p>
+                <ul>
+                    <li><code>success</code> (boolean) - <code>true</code> if event was tracked successfully</li>
+                    <li><code>result</code> (object|error) - Response data on success, error object on failure</li>
+                </ul>
+
+                <h3 style="margin-top: 32px;">phantom.event()</h3>
+                <p>Alias for <code>phantom.track()</code>. Both functions work identically.</p>
+
+                <h3 style="margin-top: 32px;">phantom.getSessionId()</h3>
+                <p>Returns the current session ID as a string.</p>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'const sessionId = phantom.getSessionId();\nconsole.log(sessionId); // sess_1707567890_abc123xyz')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">const sessionId = phantom.getSessionId();
+console.log(sessionId); // sess_1707567890_abc123xyz</code></pre>
                 </div>
             </div>
 

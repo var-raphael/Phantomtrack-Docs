@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PhantomTrack">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Apple Touch Icon (you already have this) -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
     <!-- SEO Basics -->
     <title>PhantomTrack - Instant Web Analytics Without Signup</title>
     <meta name="description" content="Track your website traffic in 30 seconds. No signup, no cookies, GDPR compliant. Privacy-focused Google Analytics alternative starting at $3/month.">
@@ -28,8 +38,15 @@
     <meta name="twitter:description" content="Track website traffic in 30 seconds. No signup, no cookies, GDPR compliant. $3/month or $20 lifetime.">
     <meta name="twitter:image" content="https://phantomtrack-docs.vercel.app/assets/images/twitter-card.jpg">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Favicon (you already have these) -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- Google Fonts - Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Existing stylesheets -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -58,6 +75,7 @@
         }
         
         .hero-title {
+            font-family: 'Orbitron', sans-serif;
             font-size: 56px;
             font-weight: 800;
             line-height: 1.1;
@@ -66,6 +84,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: 1px;
         }
         
         .hero-problem {
@@ -99,6 +118,7 @@
         }
         
         .hero-stat-number {
+            font-family: 'Orbitron', sans-serif;
             font-size: 32px;
             font-weight: 700;
             background: linear-gradient(135deg, var(--accent1), var(--accent2));
@@ -201,6 +221,11 @@
             margin-bottom: 40px;
         }
         
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
+        }
+        
         h3 {
             background: linear-gradient(135deg, var(--accent1), var(--accent2));
             -webkit-background-clip: text;
@@ -217,6 +242,7 @@
         }
 
         .plan-price {
+            font-family: 'Orbitron', sans-serif;
             font-size: 48px;
             font-weight: 700;
             margin: 20px 0;
@@ -403,6 +429,8 @@
             }
         }
     </style>
+    
+    <!-- PhantomTrack Analytics -->
     <script src="https://phantomtrack-cdn.vercel.app/phantom.v1.0.0.js?trackid=track_9ki2a8i831xwgto5exz7e"></script>
 </head>
 <body data-theme="dark">
@@ -536,6 +564,94 @@
             </div>
         </section>
         
+        <!-- All-in-One Dashboard Section -->
+        <section style="margin-top: 80px; margin-bottom: 80px;">
+            <div style="max-width: 1100px; margin: 0 auto; text-align: center; padding: 0 20px;">
+                <div style="display: inline-block; background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; color: #10b981; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 24px;">
+                    <i class="fa fa-layer-group" style="margin-right: 6px;"></i> ALL-IN-ONE DASHBOARD
+                </div>
+                
+                <h2 style="font-weight: 700; margin-bottom: 16px;">Everything You Need On One Screen</h2>
+                <p style="opacity: 0.7; margin-bottom: 48px; font-size: 18px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    No more jumping between tabs or digging through endless menus. See your entire website's performance at a glance - visitors, traffic sources, devices, locations, and trends all on one beautiful dashboard.
+                </p>
+                
+                <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%); padding: 48px 32px; border-radius: 16px; border: 1px solid rgba(99, 102, 241, 0.2);">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; text-align: left;">
+                        
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i class="fa fa-users" style="color: white; font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 8px; font-size: 16px;">Visitor Analytics</h4>
+                                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Total visitors, unique visitors, page views, and session duration - all visible instantly.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #06b6d4, #3b82f6); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i class="fa fa-map-marker-alt" style="color: white; font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 8px; font-size: 16px;">Geographic Data</h4>
+                                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">See where your visitors are from with country breakdown and tier classification.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #8b5cf6, #6366f1); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i class="fa fa-desktop" style="color: white; font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 8px; font-size: 16px;">Device & Browser</h4>
+                                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Track which devices and browsers your visitors use - mobile, desktop, or tablet.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i class="fa fa-link" style="color: white; font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 8px; font-size: 16px;">Traffic Sources</h4>
+                                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Know exactly where your traffic comes from - direct, referral, social, or search.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i class="fa fa-chart-bar" style="color: white; font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 8px; font-size: 16px;">Real-Time Trends</h4>
+                                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Watch your traffic patterns with interactive charts - hourly, daily, weekly, or monthly.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 16px; align-items: start;">
+                            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #06b6d4, #3b82f6); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i class="fa fa-mouse-pointer" style="color: white; font-size: 20px;"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 8px; font-size: 16px;">Custom Events</h4>
+                                <p style="opacity: 0.7; font-size: 14px; line-height: 1.6;">Track button clicks, form submissions, downloads - all displayed on the same page.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div style="margin-top: 40px; padding: 24px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                            <i class="fa fa-check-circle" style="color: #10b981; font-size: 24px;"></i>
+                            <p style="font-size: 16px; font-weight: 600; margin: 0;">No page switching • No endless scrolling • No confusion</p>
+                        </div>
+                        <p style="opacity: 0.6; font-size: 14px; margin-top: 12px; margin-bottom: 0;">Everything you need to understand your website traffic in one clean, organized view.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="card-grid">
             <div class="card">
                 <div class="icon"><i class="fa fa-bolt"></i></div>
@@ -922,7 +1038,7 @@
             <div class="card" style="max-width: 600px; margin: 40px auto; text-align: center;">
                 <img src="assets/images/phantom.jpg" alt="CodePhantom" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent1); margin-bottom: 20px;">
                 <h3>CodePhantom - Full Stack Developer</h3>
-                <p style="margin: 20px 0;">Based in Nigeria 🇳🇬. Specializing in web development, data analysis, and backend systems.</p>
+                <p style="margin: 20px 0;">Specializing in web development, data analysis, and backend systems.</p>
                 
                 <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 20px 0; font-size: 14px;">
                     <span style="background: var(--card); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border);">PHP</span>
@@ -947,9 +1063,11 @@
     </div>
     
     <script src="assets/js/toogle.js"></script>
+    <!-- PWA Registration Script -->
+    <script src="pwa-register.js"></script>
     <script>
     function startAnalytics() {
-        phantom.track('Dashboad_Link_clicked');
+        phantom.track('Dashboard_Link_clicked');
         setTimeout(() => {
             window.location.href = 'https://phantomtrack.xyz/dashboard';
         }, 150);

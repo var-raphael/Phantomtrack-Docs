@@ -248,41 +248,6 @@
             font-size: 14px;
         }
 
-        .theme-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 16px;
-            margin: 24px 0;
-        }
-
-        .theme-card {
-            background: var(--hover);
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .theme-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent1);
-        }
-
-        .theme-preview {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin: 0 auto 12px;
-        }
-
-        .theme-blue { background: #3b82f6; }
-        .theme-red { background: #ef4444; }
-        .theme-green { background: #10b981; }
-        .theme-amber { background: #f59e0b; }
-        .theme-purple { background: #a855f7; }
-
         @media (max-width: 968px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -312,10 +277,6 @@
             
             .code-wrapper pre {
                 padding: 12px;
-            }
-
-            .theme-grid {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -440,66 +401,9 @@
   style="width: 100%; height: 100vh; border: none;"
 &gt;&lt;/iframe&gt;</code></pre>
                 </div>
-            </div>
 
-            <div class="content-card">
-                <h2><i class="fas fa-palette"></i> Theme Colors</h2>
-                <p>Customize the dashboard appearance with different color themes using the <code>theme</code> parameter:</p>
-
-                <div class="theme-grid">
-                    <div class="theme-card">
-                        <div class="theme-preview theme-blue"></div>
-                        <strong>Blue</strong>
-                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">Default</p>
-                    </div>
-                    <div class="theme-card">
-                        <div class="theme-preview theme-red"></div>
-                        <strong>Red</strong>
-                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">theme=red</p>
-                    </div>
-                    <div class="theme-card">
-                        <div class="theme-preview theme-green"></div>
-                        <strong>Green</strong>
-                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">theme=green</p>
-                    </div>
-                    <div class="theme-card">
-                        <div class="theme-preview theme-amber"></div>
-                        <strong>Amber</strong>
-                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">theme=amber</p>
-                    </div>
-                    <div class="theme-card">
-                        <div class="theme-preview theme-purple"></div>
-                        <strong>Purple</strong>
-                        <p style="font-size: 12px; opacity: 0.6; margin-top: 4px;">theme=purple</p>
-                    </div>
-                </div>
-
-                <h3>How to use themes:</h3>
-
-                <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, '<iframe \n  src=&quot;https://phantomtrack.xyz/embed?track_id=YOUR_TRACK_ID&theme=red&quot;\n  style=&quot;width: 100%; height: 100vh; border: none;&quot;\n></iframe>')">
-                        <i class="fas fa-copy"></i> Copy
-                    </button>
-                    <pre><code class="language-html">&lt;!-- Red theme --&gt;
-&lt;iframe 
-  src="https://phantomtrack.xyz/embed?track_id=YOUR_TRACK_ID&theme=red"
-  style="width: 100%; height: 100vh; border: none;"
-&gt;&lt;/iframe&gt;</code></pre>
-                </div>
-
-                <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, '<iframe \n  src=&quot;https://phantomtrack.xyz/embed?track_id=YOUR_TRACK_ID&theme=green&quot;\n  style=&quot;width: 100%; height: 100vh; border: none;&quot;\n></iframe>')">
-                        <i class="fas fa-copy"></i> Copy
-                    </button>
-                    <pre><code class="language-html">&lt;!-- Green theme --&gt;
-&lt;iframe 
-  src="https://phantomtrack.xyz/embed?track_id=YOUR_TRACK_ID&theme=green"
-  style="width: 100%; height: 100vh; border: none;"
-&gt;&lt;/iframe&gt;</code></pre>
-                </div>
-
-                <div class="alert">
-                    <p><i class="fas fa-info-circle"></i> <strong>No theme parameter?</strong> Blue is the default theme. Just add <code>&theme=color</code> to change it.</p>
+                <div class="alert alert-success">
+                    <p><i class="fas fa-check-circle"></i> <strong>That's it!</strong> The dashboard will load with all your analytics data, charts, and metrics.</p>
                 </div>
             </div>
 
@@ -541,6 +445,20 @@
   &gt;&lt;/iframe&gt;
 &lt;/div&gt;</code></pre>
                 </div>
+
+                <h3>Inside a card/panel:</h3>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<div class=&quot;card&quot; style=&quot;padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);&quot;>\n  <h2>Analytics Dashboard</h2>\n  <iframe \n    src=&quot;https://phantomtrack.xyz/embed?track_id=YOUR_TRACK_ID&quot;\n    style=&quot;width: 100%; height: 600px; border: none;&quot;\n  ></iframe>\n</div>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;div class="card" style="padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"&gt;
+  &lt;h2&gt;Analytics Dashboard&lt;/h2&gt;
+  &lt;iframe 
+    src="https://phantomtrack.xyz/embed?track_id=YOUR_TRACK_ID"
+    style="width: 100%; height: 600px; border: none;"
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+                </div>
             </div>
 
             <div class="content-card">
@@ -548,17 +466,16 @@
                 
                 <h3>React Component:</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, 'function AnalyticsDashboard() {\n  const trackId = \'track_fz3cmifh6b817mfx71l6my\';\n  const theme = \'red\';\n  \n  return (\n    <div className=&quot;analytics-container&quot;>\n      <iframe\n        src={`https://phantomtrack.xyz/embed?track_id=${trackId}&theme=${theme}`}\n        style={{ width: \'100%\', height: \'100vh\', border: \'none\' }}\n        title=&quot;PhantomTrack Analytics&quot;\n      />\n    </div>\n  );\n}')">
+                    <button class="copy-button" onclick="copyCode(this, 'function AnalyticsDashboard() {\n  const trackId = \'track_fz3cmifh6b817mfx71l6my\';\n  \n  return (\n    <div className=&quot;analytics-container&quot;>\n      <iframe\n        src={`https://phantomtrack.xyz/embed?track_id=${trackId}`}\n        style={{ width: \'100%\', height: \'100vh\', border: \'none\' }}\n        title=&quot;PhantomTrack Analytics&quot;\n      />\n    </div>\n  );\n}')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-javascript">function AnalyticsDashboard() {
   const trackId = 'track_fz3cmifh6b817mfx71l6my';
-  const theme = 'red';
   
   return (
     &lt;div className="analytics-container"&gt;
       &lt;iframe
-        src={`https://phantomtrack.xyz/embed?track_id=${trackId}&theme=${theme}`}
+        src={`https://phantomtrack.xyz/embed?track_id=${trackId}`}
         style={{ width: '100%', height: '100vh', border: 'none' }}
         title="PhantomTrack Analytics"
       /&gt;
@@ -569,7 +486,7 @@
 
                 <h3>Vue.js Component:</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, '<template>\n  <div class=&quot;analytics-container&quot;>\n    <iframe\n      :src=&quot;embedUrl&quot;\n      style=&quot;width: 100%; height: 100vh; border: none;&quot;\n      title=&quot;PhantomTrack Analytics&quot;\n    />\n  </div>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      trackId: \'track_fz3cmifh6b817mfx71l6my\',\n      theme: \'green\'\n    }\n  },\n  computed: {\n    embedUrl() {\n      return `https://phantomtrack.xyz/embed?track_id=${this.trackId}&theme=${this.theme}`;\n    }\n  }\n}\n</script>')">
+                    <button class="copy-button" onclick="copyCode(this, '<template>\n  <div class=&quot;analytics-container&quot;>\n    <iframe\n      :src=&quot;embedUrl&quot;\n      style=&quot;width: 100%; height: 100vh; border: none;&quot;\n      title=&quot;PhantomTrack Analytics&quot;\n    />\n  </div>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      trackId: \'track_fz3cmifh6b817mfx71l6my\'\n    }\n  },\n  computed: {\n    embedUrl() {\n      return `https://phantomtrack.xyz/embed?track_id=${this.trackId}`;\n    }\n  }\n}\n</script>')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-javascript">&lt;template&gt;
@@ -586,13 +503,12 @@
 export default {
   data() {
     return {
-      trackId: 'track_fz3cmifh6b817mfx71l6my',
-      theme: 'green'
+      trackId: 'track_fz3cmifh6b817mfx71l6my'
     }
   },
   computed: {
     embedUrl() {
-      return `https://phantomtrack.xyz/embed?track_id=${this.trackId}&theme=${this.theme}`;
+      return `https://phantomtrack.xyz/embed?track_id=${this.trackId}`;
     }
   }
 }
@@ -601,19 +517,38 @@ export default {
 
                 <h3>PHP:</h3>
                 <div class="code-wrapper">
-                    <button class="copy-button" onclick="copyCode(this, '<?php\n$track_id = \'track_fz3cmifh6b817mfx71l6my\';\n$theme = \'purple\';\n$embed_url = &quot;https://phantomtrack.xyz/embed?track_id={$track_id}&theme={$theme}&quot;;\n?>\n\n<iframe \n  src=&quot;<?php echo $embed_url; ?>&quot;\n  style=&quot;width: 100%; height: 100vh; border: none;&quot;\n></iframe>')">
+                    <button class="copy-button" onclick="copyCode(this, '<?php\n$track_id = \'track_fz3cmifh6b817mfx71l6my\';\n$embed_url = &quot;https://phantomtrack.xyz/embed?track_id={$track_id}&quot;;\n?>\n\n<iframe \n  src=&quot;<?php echo $embed_url; ?>&quot;\n  style=&quot;width: 100%; height: 100vh; border: none;&quot;\n></iframe>')">
                         <i class="fas fa-copy"></i> Copy
                     </button>
                     <pre><code class="language-php">&lt;?php
 $track_id = 'track_fz3cmifh6b817mfx71l6my';
-$theme = 'purple';
-$embed_url = "https://phantomtrack.xyz/embed?track_id={$track_id}&theme={$theme}";
+$embed_url = "https://phantomtrack.xyz/embed?track_id={$track_id}";
 ?&gt;
 
 &lt;iframe 
   src="&lt;?php echo $embed_url; ?&gt;"
   style="width: 100%; height: 100vh; border: none;"
 &gt;&lt;/iframe&gt;</code></pre>
+                </div>
+
+                <h3>Next.js Component:</h3>
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, 'export default function AnalyticsDashboard() {\n  const trackId = process.env.NEXT_PUBLIC_PHANTOM_TRACK_ID;\n  \n  return (\n    <div className=&quot;w-full h-screen&quot;>\n      <iframe\n        src={`https://phantomtrack.xyz/embed?track_id=${trackId}`}\n        className=&quot;w-full h-full border-0&quot;\n        title=&quot;Analytics Dashboard&quot;\n      />\n    </div>\n  );\n}')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-javascript">export default function AnalyticsDashboard() {
+  const trackId = process.env.NEXT_PUBLIC_PHANTOM_TRACK_ID;
+  
+  return (
+    &lt;div className="w-full h-screen"&gt;
+      &lt;iframe
+        src={`https://phantomtrack.xyz/embed?track_id=${trackId}`}
+        className="w-full h-full border-0"
+        title="Analytics Dashboard"
+      /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
                 </div>
             </div>
 
@@ -622,10 +557,12 @@ $embed_url = "https://phantomtrack.xyz/embed?track_id={$track_id}&theme={$theme}
                 
                 <ul>
                     <li><strong>Keep your tracking ID secure</strong> - Don't expose it in public repositories</li>
+                    <li><strong>Use environment variables</strong> - Store track_id in .env files, not hardcoded</li>
                     <li><strong>Use HTTPS</strong> - Always load the iframe over HTTPS for security</li>
-                    <li><strong>Set appropriate sizing</strong> - Ensure the iframe has enough space to display the full dashboard</li>
+                    <li><strong>Set appropriate sizing</strong> - Ensure the iframe has enough space (minimum 700px height recommended)</li>
                     <li><strong>Test responsiveness</strong> - Check how the iframe looks on mobile devices</li>
-                    <li><strong>Match your brand</strong> - Choose a theme color that complements your design</li>
+                    <li><strong>Add loading states</strong> - Show a spinner while the iframe loads</li>
+                    <li><strong>Handle errors gracefully</strong> - Add error boundaries in React/Vue apps</li>
                 </ul>
 
                 <div class="alert alert-warning">
@@ -634,28 +571,63 @@ $embed_url = "https://phantomtrack.xyz/embed?track_id={$track_id}&theme={$theme}
             </div>
 
             <div class="content-card">
+                <h2><i class="fas fa-magic"></i> Advanced: Loading State Example</h2>
+                <p>Show a loading spinner while the iframe loads:</p>
+
+                <div class="code-wrapper">
+                    <button class="copy-button" onclick="copyCode(this, '<div style=&quot;position: relative; width: 100%; height: 100vh;&quot;>\n  <!-- Loading spinner -->\n  <div id=&quot;loading&quot; style=&quot;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);&quot;>\n    <div style=&quot;border: 4px solid rgba(99, 102, 241, 0.1); border-left-color: #6366f1; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite;&quot;></div>\n    <p style=&quot;margin-top: 16px; color: #6b7280;&quot;>Loading dashboard...</p>\n  </div>\n  \n  <!-- Iframe -->\n  <iframe \n    id=&quot;analytics-iframe&quot;\n    src=&quot;https://phantomtrack.xyz/embed?track_id=YOUR_TRACK_ID&quot;\n    style=&quot;width: 100%; height: 100%; border: none;&quot;\n    onload=&quot;document.getElementById(\'loading\').style.display = \'none\';&quot;\n  ></iframe>\n</div>\n\n<style>\n@keyframes spin {\n  to { transform: rotate(360deg); }\n}\n</style>')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <pre><code class="language-html">&lt;div style="position: relative; width: 100%; height: 100vh;"&gt;
+  &lt;!-- Loading spinner --&gt;
+  &lt;div id="loading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"&gt;
+    &lt;div style="border: 4px solid rgba(99, 102, 241, 0.1); border-left-color: #6366f1; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite;"&gt;&lt;/div&gt;
+    &lt;p style="margin-top: 16px; color: #6b7280;"&gt;Loading dashboard...&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;!-- Iframe --&gt;
+  &lt;iframe 
+    id="analytics-iframe"
+    src="https://phantomtrack.xyz/embed?track_id=YOUR_TRACK_ID"
+    style="width: 100%; height: 100%; border: none;"
+    onload="document.getElementById('loading').style.display = 'none';"
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+&lt;/style&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="content-card">
                 <h2><i class="fas fa-question-circle"></i> Troubleshooting</h2>
                 
                 <h3>Iframe not loading?</h3>
                 <ul>
-                    <li>Verify your tracking ID is correct</li>
-                    <li>Check browser console for errors (F12)</li>
+                    <li>Verify your tracking ID is correct (should start with <code>track_</code>)</li>
+                    <li>Check browser console for errors (press F12)</li>
                     <li>Ensure you're using HTTPS, not HTTP</li>
-                    <li>Try removing the theme parameter to test with default blue</li>
+                    <li>Check if your browser is blocking third-party cookies</li>
+                    <li>Try in an incognito/private window</li>
                 </ul>
 
                 <h3>Dashboard looks cut off?</h3>
                 <ul>
                     <li>Increase the iframe height (minimum 700px recommended)</li>
                     <li>Use <code>height: 100vh</code> for full viewport height</li>
-                    <li>Check your container doesn't have overflow hidden</li>
+                    <li>Check your container doesn't have <code>overflow: hidden</code></li>
+                    <li>Remove any max-height constraints on parent elements</li>
                 </ul>
 
-                <h3>Theme not changing?</h3>
+                <h3>Showing error page?</h3>
                 <ul>
-                    <li>Make sure theme parameter is lowercase: <code>theme=red</code> not <code>theme=Red</code></li>
-                    <li>Available themes: blue, red, green, amber, purple</li>
-                    <li>Clear browser cache and reload</li>
+                    <li>Confirm the track_id exists in your PhantomTrack account</li>
+                    <li>Check the URL format: <code>?track_id=track_xxxxx</code></li>
+                    <li>Make sure there are no extra spaces or characters</li>
+                    <li>Verify your PhantomTrack subscription is active</li>
                 </ul>
             </div>
 
